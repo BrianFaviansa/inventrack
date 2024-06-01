@@ -9,7 +9,12 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
 
+    <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
+    <!-- highchart -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+
 
     <!-- script tailwindconfig.js -->
     <script>
@@ -42,8 +47,8 @@
     <!-- script flowbite -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 
-    <?= $themeSwitch; ?>
-    <?= $smoothScroll; ?>
+    <?= $themeSwitch ?? ''; ?>
+    <?= $smoothScroll ?? ''; ?>
 </body>
 </html>
 

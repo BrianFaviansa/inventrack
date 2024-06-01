@@ -9,9 +9,24 @@ class AuthController {
         return view('auth/auth_layout', ['url' => 'login']);
     }
 
-    static function register()
+    static function registerAs()
     {
-        return view('auth/auth_layout', ['url' => 'register']);
+        return view('auth/auth_layout', ['url' => 'choose']);
+    }
+
+    static function registerManager()
+    {
+        return view('auth/auth_layout', ['url' => 'register', 'role' => 'manager']);
+    }
+
+    static function registerStoker()
+    {
+        return view('auth/auth_layout', ['url' => 'register', 'role' => 'stoker']);
+    }
+
+    static function registerKasir()
+    {
+        return view('auth/auth_layout', ['url' => 'register', 'role' => 'kasir']);
     }
 
     static function registerProses()
