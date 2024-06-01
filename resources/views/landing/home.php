@@ -2,19 +2,16 @@
 
 <div class="mt-18">
     <!-- hero -->
-    <section id="home" class="bg-white dark:bg-gray-900 pt-8">
+    <section id="home" class="bg-gray-100 dark:bg-gray-800 pt-8">
         <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
             <div class="mr-auto place-self-center lg:col-span-7">
-                <h1 class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">Payments tool for software companies</h1>
-                <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">From checkout to global sales tax compliance, companies around the world use Flowbite to simplify their payment stack.</p>
-                <a href="#" class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
-                    Get started
+                <h1 class="max-w-2xl mb-4 text-4xl font-bold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">Solusi Manajemen Inventaris untuk Perusahaan</h1>
+                <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">Dari pengelolaan stok hingga pelaporan otomatis, perusahaan di seluruh dunia menggunakan Inventrack untuk menyederhanakan manajemen inventaris mereka.</p>
+                <a href="" class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+                Masuk
                     <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
                     </svg>
-                </a>
-                <a href="#" class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
-                    Speak to Sales
                 </a>
             </div>
             <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
@@ -25,8 +22,8 @@
     <!-- hero end -->
 
     <!-- about -->
-    <section id="about" class="py-10 dark:bg-gray-800">
-        <h1 class="mt-10 mb-8 md:mb-20 text-3xl font-extrabold tracking-tight leading-none dark:text-white text-slate-800 md:text-4xl lg:text-5xl text-center">Why Choose Inventrack?</h1>
+    <section id="about" class="py-10 dark:bg-gray-900">
+        <h1 class="mt-10 mb-8 md:mb-20 text-3xl font-bold tracking-tight leading-none dark:text-white text-slate-800 md:text-4xl lg:text-5xl text-center">Why Choose Inventrack?</h1>
         <div class="container mx-8 md:mx-auto sm:grid-cols-2 md:justify-items-center grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
             <div class="max-w-md p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <div class="rounded-full w-14 h-14 mx-auto flex justify-center items-center bg-red-300">
@@ -136,7 +133,7 @@
         </div>
     </section>
 
-    <section class="bg-white dark:bg-gray-900">
+    <section class="bg-white dark:bg-gray-800">
         <div class="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-16 lg:px-6">
             <div class="font-light text-gray-500 sm:text-lg dark:text-gray-400">
                 <h2 class="mb-4 text-4xl font-extrabold text-gray-900 dark:text-white">We didn't reinvent the wheel</h2>
@@ -223,7 +220,7 @@
     <!-- testimony end -->
 
     <!-- pricing -->
-    <section id="pricing" class="bg-gray-100 dark:bg-gray-900 py-12">
+    <section id="pricing" class="bg-gray-100 dark:bg-gray-800 py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
                 <h2 class="text-4xl font-extrabold text-gray-900 dark:text-white sm:text-5xl">

@@ -72,6 +72,4 @@ if (isset($url)) {
 </script>
 <?php $smoothScroll = ob_get_clean(); ?>
 
-
-
 <?php include 'resources/views/master_layout/master.php'; ?>
