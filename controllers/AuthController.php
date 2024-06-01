@@ -8,4 +8,19 @@ class AuthController {
     {
         return view('auth/auth_layout', ['url' => 'login']);
     }
+
+    static function register()
+    {
+        return view('auth/auth_layout', ['url' => 'register']);
+    }
+
+    static function registerProses()
+    {
+        $data = [
+            'name' => $_POST['name'],
+            'email' => $_POST['email'],
+            'password' => $_POST['password'],
+            'password_confirmation' => $_POST['password_confirmation'],
+        ];
+    }
 }

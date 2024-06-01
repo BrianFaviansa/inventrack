@@ -1,5 +1,5 @@
 <?php ob_start(); ?>
-<?php include 'resources/views/landing/nav.php'; ?>
+<?php include 'resources/views/beranda/nav.php'; ?>
 
 <?php
 if (isset($url)) {
@@ -7,7 +7,7 @@ if (isset($url)) {
 }
 ?>
 
-<?php include 'resources/views/landing/footer.php'; ?>
+<?php include 'resources/views/beranda/footer.php'; ?>
 <?php $body = ob_get_clean(); ?>
 
 
@@ -66,7 +66,7 @@ if (isset($url)) {
 
             $('html, body').animate({
                 scrollTop: target.offset().top
-            }, 1000);
+            }, 800);
         });
     });
 </script>

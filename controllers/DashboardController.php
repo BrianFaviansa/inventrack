@@ -3,9 +3,9 @@
 include_once 'function/main.php';
 include_once 'app/config/static.php';
 
-class LandingController {
+class DashboardController {
     static function index()
     {
-        return view('landing/landing_layout', ['url' => 'home']);
+        return view('dashboard/dashboard_layout', ['url' => 'barang']);
     }
 }
