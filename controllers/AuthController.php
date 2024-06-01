@@ -38,4 +38,14 @@ class AuthController {
             'password_confirmation' => $_POST['password_confirmation'],
         ];
     }
+
+    static function loginProsess()
+    {
+        $data = [
+            'email' => $_POST['email'],
+            'password' => $_POST['password'],
+        ];
+
+        $pengguna = Pengguna::getUserByEmail($data['email']);
+    }
 }
