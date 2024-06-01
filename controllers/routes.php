@@ -1,4 +1,9 @@
 <?php 
 
+// landing
 Router::url('', 'get', 'LandingController::index');
-Router::url('about', 'get', 'LandingController::about');
+
+// auth
+Router::url('login', 'get', 'AuthController::login');
+
+

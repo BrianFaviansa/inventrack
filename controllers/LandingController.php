@@ -8,8 +8,4 @@ class LandingController {
     {
         return view('landing/landing_layout', ['url' => 'home']);
     }
-
-    static function about() {
-        return view('landing/landing_layout', ['url' => 'about']);
-    }
 }
