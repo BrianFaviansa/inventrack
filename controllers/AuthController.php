@@ -16,17 +16,17 @@ class AuthController {
 
     static function registerManager()
     {
-        return view('auth/auth_layout', ['url' => 'register', 'role' => 'manager']);
+        return view('auth/auth_layout', ['url' => 'register', 'role' => 'Manager']);
     }
 
     static function registerStoker()
     {
-        return view('auth/auth_layout', ['url' => 'register', 'role' => 'stoker']);
+        return view('auth/auth_layout', ['url' => 'register', 'role' => 'Stoker']);
     }
 
     static function registerKasir()
     {
-        return view('auth/auth_layout', ['url' => 'register', 'role' => 'kasir']);
+        return view('auth/auth_layout', ['url' => 'register', 'role' => 'Kasir']);
     }
 
     static function registerProses()

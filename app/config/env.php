@@ -14,4 +14,4 @@ function parseEnv($filePath){
     return $env;
 }
 
-$_ENV = parseEnv(".env");
+$_ENV = parseEnv(__DIR__ . '/../../.env');
