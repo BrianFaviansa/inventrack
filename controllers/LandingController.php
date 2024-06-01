@@ -6,10 +6,10 @@ include_once 'app/config/static.php';
 class LandingController {
     static function index()
     {
-        return view('landing/layout', ['url' => 'home']);
+        return view('landing/landing_layout', ['url' => 'home']);
     }
 
     static function about() {
-        return view('landing/layout', ['url' => 'about']);
+        return view('landing/landing_layout', ['url' => 'about']);
     }
 }
