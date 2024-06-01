@@ -8,4 +8,9 @@ class DashboardController {
     {
         return view('dashboard/dashboard_layout', ['url' => 'barang']);
     }
+
+    static function manager()
+    {
+        return view('dashboard/dashboard_layout', ['url' => 'manager_tes']);
+    }
 }

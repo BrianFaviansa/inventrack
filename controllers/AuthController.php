@@ -2,6 +2,8 @@
 
 include_once 'function/main.php';
 include_once 'app/config/static.php';
+include_once 'models/User.php';
+include_once 'models/Role.php';
 
 class AuthController {
     static function login()
@@ -16,17 +18,28 @@ class AuthController {
 
     static function registerManager()
     {
-        return view('auth/auth_layout', ['url' => 'register', 'role' => 'Manager']);
+        $role_id = 1;
+        $nama_role = Roles::getRoleNameById($role_id);
+
+        return view('auth/auth_layout', ['url' => 'register', 'role_id' => $role_id, 'nama_role' => $nama_role]);
     }
 
     static function registerStoker()
     {
-        return view('auth/auth_layout', ['url' => 'register', 'role' => 'Stoker']);
+        $role_id = 2;
+        $nama_role = Roles::getRoleNameById($role_id);
+
+
+        return view('auth/auth_layout', ['url' => 'register', 'role_id' => $role_id, 'nama_role' => $nama_role]);
     }
 
     static function registerKasir()
     {
-        return view('auth/auth_layout', ['url' => 'register', 'role' => 'Kasir']);
+        $role_id = 3;
+        $nama_role = Roles::getRoleNameById($role_id);
+
+
+        return view('auth/auth_layout', ['url' => 'register', 'role_id' => $role_id, 'nama_role' => $nama_role]);
     }
 
     static function registerProses()
@@ -37,15 +50,36 @@ class AuthController {
             'password' => $_POST['password'],
             'password_confirmation' => $_POST['password_confirmation'],
         ];
+
     }
 
-    static function loginProsess()
+    static function loginProses()
     {
-        $data = [
-            'email' => $_POST['email'],
-            'password' => $_POST['password'],
-        ];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
 
-        $pengguna = Pengguna::getUserByEmail($data['email']);
+        $user = User::login($email, $password);
+
+        if (!$user) {
+            setFlashMessage('error', 'Email atau Password Salah!');
+            header('Location: login');
+            return;
+        }
+
+        $auth = [
+            'id_user' => $user['id_user'],
+            'nama' => $user['nama'],
+            'email' => $user['email'],
+            'id_role' => $user['id_role'],
+        ];
+        
+        setFlashMessage('success', 'Login Berhasil, Selamat Datang!' );
+        return view('beranda/beranda_layout', ['url' => 'beranda', 'auth' => $auth]);
+    }
+
+    static function logout()
+    {
+        session_destroy();
+        header('Location: login');
     }
 }

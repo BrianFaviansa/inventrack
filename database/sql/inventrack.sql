@@ -17,8 +17,8 @@ CREATE TABLE `role` (
   `nama_role` varchar(255) NOT NULL
 );
 
-CREATE TABLE `pengguna` (
-  `id_pengguna` integer PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE `user` (
+  `id_user` integer PRIMARY KEY AUTO_INCREMENT,
   `id_role` integer NOT NULL,
   `nama` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
@@ -28,7 +28,7 @@ CREATE TABLE `pengguna` (
 
 CREATE TABLE `pembelian` (
   `id_pembelian` integer PRIMARY KEY AUTO_INCREMENT,
-  `id_pengguna` integer NOT NULL,
+  `id_user` integer NOT NULL,
   `total_harga` decimal(10,2) NOT NULL,
   `tanggal` date NOT NULL
 );
@@ -43,7 +43,7 @@ CREATE TABLE `detail_pembelian` (
 
 CREATE TABLE `penjualan` (
   `id_penjualan` integer PRIMARY KEY AUTO_INCREMENT,
-  `id_pengguna` integer NOT NULL,
+  `id_user` integer NOT NULL,
   `total_harga` decimal(10,2) NOT NULL,
   `tanggal` date NOT NULL
 );
@@ -56,18 +56,18 @@ CREATE TABLE `detail_penjualan` (
   `harga_jual` decimal(10,2) NOT NULL
 );
 
+ALTER TABLE `penjualan` ADD FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
+
+ALTER TABLE `pembelian` ADD FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
+
 ALTER TABLE `detail_pembelian` ADD FOREIGN KEY (`id_pembelian`) REFERENCES `pembelian` (`id_pembelian`);
-
-ALTER TABLE `detail_pembelian` ADD FOREIGN KEY (`id_barang`) REFERENCES `barang` (`id_barang`);
-
-ALTER TABLE `penjualan` ADD FOREIGN KEY (`id_pengguna`) REFERENCES `pengguna` (`id_pengguna`);
-
-ALTER TABLE `pembelian` ADD FOREIGN KEY (`id_pengguna`) REFERENCES `pengguna` (`id_pengguna`);
 
 ALTER TABLE `detail_penjualan` ADD FOREIGN KEY (`id_penjualan`) REFERENCES `penjualan` (`id_penjualan`);
 
 ALTER TABLE `detail_penjualan` ADD FOREIGN KEY (`id_barang`) REFERENCES `barang` (`id_barang`);
 
-ALTER TABLE `barang` ADD FOREIGN KEY (`id_kategori`) REFERENCES `kategori` (`id_kategori`);
+ALTER TABLE `detail_pembelian` ADD FOREIGN KEY (`id_barang`) REFERENCES `barang` (`id_barang`);
 
-ALTER TABLE `pengguna` ADD FOREIGN KEY (`id_role`) REFERENCES `role` (`id_role`);
+ALTER TABLE `user` ADD FOREIGN KEY (`id_role`) REFERENCES `role` (`id_role`);
+
+ALTER TABLE `barang` ADD FOREIGN KEY (`id_kategori`) REFERENCES `kategori` (`id_kategori`);
