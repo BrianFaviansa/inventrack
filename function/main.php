@@ -83,7 +83,7 @@ function displayFlashSuccess($type)
             unset($_SESSION[$messageKey]);
         }
     } else {
-        $messageKey = $type . '_' . $_SESSION['user']['id'];
+        $messageKey = $type . '_' . $_SESSION['user']['id_user'];
         if (isset($_SESSION[$messageKey])) {
             echo '<div class="alert alert-' . $type . ' alert-dismissible fade show absolute" role="alert">';
             echo $_SESSION[$messageKey];

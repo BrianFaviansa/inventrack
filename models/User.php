@@ -1,39 +1,55 @@
 <?php
-include_once __DIR__ . '/../app/config/conn.php';
+
+include_once 'app/config/conn.php';
 
 class User
 {
-    static function getUserByEmail($email)
+    static function login($data = [])
     {
         global $conn;
-        $sql = "SELECT * FROM user WHERE email = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param('s', $email);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $row = $result->fetch_assoc();
-        $stmt->close();
-        return $row;
-    }
-
-    static function login($email, $password)
-    {
-        $user = self::getUserByEmail($email);
-        if ($user) {
-            if (password_verify($password, $user['password'])) {
-                return $user;
+    
+        $email = $data['email'];
+        $password = $data['password'];
+    
+        $result = $conn->query("SELECT * FROM user WHERE email = '$email'");
+        if ($result = $result->fetch_assoc()) {
+            $hashedPassword = $result['password'];
+            $verify = password_verify($password, $hashedPassword);
+            if ($verify) {
+                return $result;
+            } else {
+                return false;
             }
         }
-        return false;
     }
-
-    static function register($data)
+    
+    static function register($data = [])
     {
         global $conn;
-        $sql = "INSERT INTO user (nama, email, password, role_id) VALUES (?, ?, ?, ?)";
+
+        $nama = $data['nama'];
+        $password = $data['password'];
+        $email = $data['email'];
+
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $sql = "INSERT INTO user SET nama = ?, password = ?, email = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param('sssi', $data['name'], $data['email'], $data['password'], $data['role_id']);
+        $stmt->bind_param('sss', $nama, $hashedPassword, $email);
         $stmt->execute();
-        $stmt->close();
+
+        $result = $stmt->affected_rows > 0 ? true : false;
+        return $result;
+    }
+
+    static function getPassword($nama)
+    {
+        global $conn;
+        $sql = "SELECT password FROM user WHERE nama = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('s', $nama);
+        $stmt->execute();
+
+        $result = $stmt->affected_rows > 0 ? true : false;
+        return $result;
     }
 }

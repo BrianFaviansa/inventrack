@@ -53,33 +53,40 @@ class AuthController {
 
     }
 
-    static function loginProses()
-    {
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-
-        $user = User::login($email, $password);
-
-        if (!$user) {
-            setFlashMessage('error', 'Email atau Password Salah!');
-            header('Location: login');
-            return;
+    static function sessionLogin(){
+        $post = array_map('htmlspecialchars', $_POST);
+    
+        $user = User::login([
+            'email' => $post['email'], 
+            'password' => $post['password']
+        ]);
+        if ($user) {
+            unset($user['password']);
+            if($user['id_role'] == '1'){
+                $_SESSION['user'] = $user;
+                header('Location: dashboard-manager');
+            }
+            elseif($user['id_role'] == '2'){
+                $_SESSION['user'] = $user;
+                header('Location: dashboard-stoker');
+            }
+            elseif($user['id_role'] == '3'){
+                $_SESSION['user'] = $user;
+                header('Location: dashboard-kasir');
+            }
         }
-
-        $auth = [
-            'id_user' => $user['id_user'],
-            'nama' => $user['nama'],
-            'email' => $user['email'],
-            'id_role' => $user['id_role'],
-        ];
-        
-        setFlashMessage('success', 'Login Berhasil, Selamat Datang!' );
-        return view('beranda/beranda_layout', ['url' => 'beranda', 'auth' => $auth]);
+        else {
+            header('Location: '.BASEURL.'login?failed=true');
+        }
     }
-
     static function logout()
     {
         session_destroy();
         header('Location: login');
+    }
+
+    static function restricted()
+    {
+        return view('auth/auth_layout', ['url' => 'restricted']);
     }
 }
