@@ -1,7 +1,7 @@
 <?php
 require_once '../../app/config/conn.php';
 
-class UserSeeder
+class PenggunaSeeder
 {
     private $conn;
 
