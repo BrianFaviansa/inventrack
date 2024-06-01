@@ -11,7 +11,7 @@ if (isset($url)) {
 <?php $body = ob_get_clean(); ?>
 
 
-<?php ob_start(); ?>  
+<?php ob_start(); ?>
 <script>
     let themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
     let themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
@@ -55,6 +55,23 @@ if (isset($url)) {
     });
 </script>
 <?php $themeSwitch = ob_get_clean(); ?>
+
+<?php ob_start(); ?>
+<script>
+    $(document).ready(function() {
+        $('.smoothScroll').click(function(event) {
+            event.preventDefault();
+            var targetId = $(this).attr('href');
+            var target = $(targetId);
+
+            $('html, body').animate({
+                scrollTop: target.offset().top
+            }, 1000);
+        });
+    });
+</script>
+<?php $smoothScroll = ob_get_clean(); ?>
+
 
 
 <?php include 'resources/views/master_layout/master.php'; ?>
