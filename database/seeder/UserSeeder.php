@@ -1,7 +1,7 @@
 <?php
 require_once '../../app/config/conn.php';
 
-class PenggunaSeeder
+class UserSeeder
 {
     private $conn;
 
@@ -19,7 +19,7 @@ class PenggunaSeeder
         ];
 
         foreach ($users as $user) {
-            $stmt = $this->conn->prepare("INSERT INTO pengguna (nama, email, password, no_telpon, id_role) VALUES (?, ?, ?, ?, ?)");
+            $stmt = $this->conn->prepare("INSERT INTO user (nama, email, password, no_telpon, id_role) VALUES (?, ?, ?, ?, ?)");
             $stmt->bind_param('ssssi', $user['nama'], $user['email'], $user['password'], $user['no_telpon'], $user['id_role']);
             $stmt->execute();
             $stmt->close();
