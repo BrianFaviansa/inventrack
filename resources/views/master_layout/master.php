@@ -10,6 +10,7 @@
     <!-- css flowbite -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
 
+    <!-- script tailwindconfig.js -->
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -21,6 +22,7 @@
 
         }
     </script>
+
     <!-- flowbite dark mode check -->
     <script>
         // On page load or when changing themes, best to add inline in `head` to avoid FOUC
@@ -39,7 +41,7 @@
     <!-- script flowbite -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 
-    <?= $themeSwitch ?? ''; ?>
+    <?= $themeSwitch; ?>
 </body>
 
 </html>
