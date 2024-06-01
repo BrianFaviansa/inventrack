@@ -68,4 +68,20 @@ class User
             return null;
         }
     }
+
+    public static function getUserById($id)
+    {
+        global $conn;
+
+        $id = $conn->real_escape_string($id);
+
+        $query = "SELECT * FROM users WHERE id = '$id' LIMIT 1";
+        $result = $conn->query($query);
+
+        if ($result->num_rows > 0) {
+            return $result->fetch_assoc();
+        } else {
+            return null;
+        }
+    }
 }

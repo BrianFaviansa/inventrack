@@ -15,7 +15,6 @@
     <!-- highchart -->
     <script src="https://code.highcharts.com/highcharts.js"></script>
 
-
     <!-- script tailwindconfig.js -->
     <script>
         tailwind.config = {
