@@ -1,11 +1,12 @@
-<?php 
+<?php
 
 include_once 'function/main.php';
 include_once 'app/config/static.php';
 include_once 'models/User.php';
 include_once 'models/Role.php';
 
-class AuthController {
+class AuthController
+{
     static function login()
     {
         return view('auth/auth_layout', ['url' => 'login']);
@@ -44,39 +45,74 @@ class AuthController {
 
     static function registerProses()
     {
-        $data = [
-            'name' => $_POST['name'],
-            'email' => $_POST['email'],
-            'password' => $_POST['password'],
-            'password_confirmation' => $_POST['password_confirmation'],
-        ];
+        $post = array_map('htmlspecialchars', $_POST);
+        $requiredFields = ['nama', 'email', 'password', 'id_role'];
+        foreach ($requiredFields as $field) {
+            if (empty(trim($post[$field]))) {
+                http_response_code(400);
+                echo json_encode(['message' => 'Harap isi semua kolom yang diperlukan!']);
+                exit();
+            }
+        }
 
+        // Validasi email
+        if (!filter_var($post['email'], FILTER_VALIDATE_EMAIL)) {
+            http_response_code(400);
+            echo json_encode(['message' => 'Email tidak valid!']);
+            exit();
+        }
+
+        try {
+            $existingEmail = User::getUserByEmail($post['email']);
+    
+            if($existingEmail) {
+                if($existingEmail['email'] === $post['email']) {
+                    throw new Exception( 'Email telah terdaftar' );
+                }
+            }
+
+            $user = User::register([
+                'nama' => $post['nama'],
+                'email' => $post['email'],
+                'password' => password_hash($post['password'], PASSWORD_DEFAULT),
+                'id_role' => $post['id_role']
+            ]);
+
+            if ( $user ) {
+                header( 'Location: login' );
+            }
+            exit();
+
+        } catch (Exception $e) {
+            http_response_code(400);
+            echo json_encode(['message' => 'Registrasi gagal! Email telah terdaftar!']);
+            exit();
+        }
+        
     }
 
-    static function sessionLogin(){
+    static function sessionLogin()
+    {
         $post = array_map('htmlspecialchars', $_POST);
-    
+
         $user = User::login([
-            'email' => $post['email'], 
+            'email' => $post['email'],
             'password' => $post['password']
         ]);
         if ($user) {
             unset($user['password']);
-            if($user['id_role'] == '1'){
+            if ($user['id_role'] == '1') {
                 $_SESSION['user'] = $user;
                 header('Location: dashboard-manager');
-            }
-            elseif($user['id_role'] == '2'){
+            } elseif ($user['id_role'] == '2') {
                 $_SESSION['user'] = $user;
                 header('Location: dashboard-stoker');
-            }
-            elseif($user['id_role'] == '3'){
+            } elseif ($user['id_role'] == '3') {
                 $_SESSION['user'] = $user;
                 header('Location: dashboard-kasir');
             }
-        }
-        else {
-            header('Location: '.BASEURL.'login?failed=true');
+        } else {
+            header('Location: ' . BASEURL . 'login?failed=true');
         }
     }
     static function logout()

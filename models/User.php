@@ -7,10 +7,10 @@ class User
     static function login($data = [])
     {
         global $conn;
-    
+
         $email = $data['email'];
         $password = $data['password'];
-    
+
         $result = $conn->query("SELECT * FROM user WHERE email = '$email'");
         if ($result = $result->fetch_assoc()) {
             $hashedPassword = $result['password'];
@@ -22,7 +22,7 @@ class User
             }
         }
     }
-    
+
     static function register($data = [])
     {
         global $conn;
@@ -51,5 +51,21 @@ class User
 
         $result = $stmt->affected_rows > 0 ? true : false;
         return $result;
+    }
+
+    public static function getUserByEmail($email)
+    {
+        global $conn;
+
+        $email = $conn->real_escape_string($email);
+
+        $query = "SELECT email FROM users WHERE email = '$email' LIMIT 1";
+        $result = $conn->query($query);
+
+        if ($result->num_rows > 0) {
+            return $result->fetch_assoc();
+        } else {
+            return null;
+        }
     }
 }
