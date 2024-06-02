@@ -1,7 +1,7 @@
 <?php ob_start(); ?>
 <?php include 'resources/views/manager/navside.php'; ?>
 
-<div class="p-4 sm:ml-64">
+<div class="sm:ml-64">
     <?php
     if (isset($url)) {
         include $url . '.php';

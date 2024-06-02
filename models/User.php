@@ -1,6 +1,5 @@
 <?php
-
-include_once 'app/config/conn.php';
+include_once __DIR__ . '/../app/config/conn.php';
 
 class User
 {
@@ -83,5 +82,17 @@ class User
         } else {
             return null;
         }
+    }
+
+    public static function countUser()
+    {
+        global $conn;
+
+        $query = "SELECT COUNT(*) as total FROM user";
+        $result = $conn->query($query);
+        $row = $result->fetch_assoc();
+        $total = $row['total'];
+
+        return $total;
     }
 }
