@@ -14,6 +14,7 @@ Router::url('register', 'post', 'AuthController::registerProses');
 
 // dashboard manager
 Router::url('dashboard-manager', 'get', 'ManagerController::index');
+Router::url('dashboard-manager/kategori', 'get', 'ManagerController::kategori');
 
 // dashboard stoker
 Router::url('dashboard-stoker', 'get', 'StokerController::index');
