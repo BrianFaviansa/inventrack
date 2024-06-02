@@ -95,4 +95,23 @@ class User
 
         return $total;
     }
+
+    public static function role($id)
+    {
+        global $conn;
+
+        $query = "SELECT * FROM role JOIN user_role ON role.id_role = user_roles.role_id WHERE user_roles.user_id = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param('i', $id);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+        $roles = [];
+
+        while ($row = $result->fetch_assoc()) {
+            $roles[] = $row;
+        }
+
+        return $roles;
+    }
 }

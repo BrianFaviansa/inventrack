@@ -21,6 +21,7 @@ class ManagerController{
 
             return view('manager/dashboard_layout', [
                 'url' => 'stats',
+                'user' => $user,
                 'totalKategori' => $totalKategori,
                 'totalUser' => $totalUser,
                 'totalBarang' => $totalBarang,
