@@ -66,4 +66,16 @@ class Kategori
 
         return $stmt->affected_rows;
     }
+
+    public static function destroy($id_kategori)
+    {
+        global $conn;
+        var_dump($id_kategori);die;
+        $sql = "DELETE FROM kategori WHERE id_kategori = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $id_kategori);
+        $stmt->execute();
+
+        return $stmt->affected_rows;
+    }
 }
