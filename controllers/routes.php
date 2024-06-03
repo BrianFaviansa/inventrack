@@ -18,6 +18,7 @@ Router::url('dashboard-manager', 'get', 'ManagerController::index');
 // dashboard manager - kategori
 Router::url('dashboard-manager/kategori', 'get', 'ManagerController::kategori');
 Router::url('storeKategori', 'post', 'KategoriController::store');
+Router::url('updateKategori', 'post', 'KategoriController::update');
 
 // dashboard stoker
 Router::url('dashboard-stoker', 'get', 'StokerController::index');

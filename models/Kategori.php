@@ -54,4 +54,16 @@ class Kategori
 
         return $stmt->affected_rows;
     }
+
+    public static function update($id_kategori, $nama)
+    {
+        global $conn;
+
+        $sql = "UPDATE kategori SET nama_kategori = ? WHERE id_kategori = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("si", $nama, $id_kategori);
+        $stmt->execute();
+
+        return $stmt->affected_rows;
+    }
 }
