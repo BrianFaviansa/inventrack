@@ -26,21 +26,6 @@ CREATE TABLE `user` (
   `no_telpon` varchar(255)
 );
 
-CREATE TABLE `pembelian` (
-  `id_pembelian` integer PRIMARY KEY AUTO_INCREMENT,
-  `id_user` integer NOT NULL,
-  `total_harga` decimal(10,2) NOT NULL,
-  `tanggal` date NOT NULL
-);
-
-CREATE TABLE `detail_pembelian` (
-  `id_detail_pembelian` integer PRIMARY KEY AUTO_INCREMENT,
-  `id_barang` integer NOT NULL,
-  `id_pembelian` integer NOT NULL,
-  `jumlah` integer NOT NULL,
-  `harga_beli` decimal(10,2) NOT NULL
-);
-
 CREATE TABLE `penjualan` (
   `id_penjualan` integer PRIMARY KEY AUTO_INCREMENT,
   `id_user` integer NOT NULL,
@@ -58,16 +43,28 @@ CREATE TABLE `detail_penjualan` (
 
 ALTER TABLE `penjualan` ADD FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
 
-ALTER TABLE `pembelian` ADD FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
-
-ALTER TABLE `detail_pembelian` ADD FOREIGN KEY (`id_pembelian`) REFERENCES `pembelian` (`id_pembelian`);
-
 ALTER TABLE `detail_penjualan` ADD FOREIGN KEY (`id_penjualan`) REFERENCES `penjualan` (`id_penjualan`);
 
 ALTER TABLE `detail_penjualan` ADD FOREIGN KEY (`id_barang`) REFERENCES `barang` (`id_barang`);
 
-ALTER TABLE `detail_pembelian` ADD FOREIGN KEY (`id_barang`) REFERENCES `barang` (`id_barang`);
-
 ALTER TABLE `user` ADD FOREIGN KEY (`id_role`) REFERENCES `role` (`id_role`);
 
 ALTER TABLE `barang` ADD FOREIGN KEY (`id_kategori`) REFERENCES `kategori` (`id_kategori`);
+
+-- Insert data ke tabel role
+INSERT INTO `role` (`nama_role`) VALUES
+('Manager'),
+('Stoker'),
+('Kasir');
+
+-- Insert data ke tabel kategori
+INSERT INTO `kategori` (`nama_kategori`) VALUES
+('Minyak'),
+('Beras'),
+('Snack');
+
+-- Insert data ke tabel user
+INSERT INTO `user` (`id_role`, `nama`, `email`, `password`, `no_telpon`) VALUES
+(1, 'Manager', 'manager@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '123456789'), -- password: password
+(2, 'Stoker', 'stoker@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '987654321'), -- password: password
+(3, 'Kasir', 'kasir@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '456123789'); -- password: password
