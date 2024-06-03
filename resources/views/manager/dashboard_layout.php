@@ -9,7 +9,6 @@
     ?>
 </div>
 
-
 <?php $body = ob_get_clean(); ?>
 
 <?php ob_start(); ?>

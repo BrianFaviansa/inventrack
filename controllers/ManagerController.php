@@ -6,7 +6,6 @@ include_once 'models/User.php';
 include_once 'models/Kategori.php';
 include_once 'models/Barang.php';
 include_once 'models/Penjualan.php';
-include_once 'models/Pembelian.php';
 
 class ManagerController{
     static function index(){
@@ -17,8 +16,6 @@ class ManagerController{
             $totalUser = User::countUser();
             $totalBarang = Barang::countBarang();
             $totalPenjualan = Penjualan::countPenjualan();
-            $totalPembelian = Pembelian::countPembelian();
-
             return view('manager/dashboard_layout', [
                 'url' => 'stats',
                 'user' => $user,
@@ -26,7 +23,6 @@ class ManagerController{
                 'totalUser' => $totalUser,
                 'totalBarang' => $totalBarang,
                 'totalPenjualan' => $totalPenjualan,
-                'totalPembelian' => $totalPembelian,
             ]);
         }
         else{
