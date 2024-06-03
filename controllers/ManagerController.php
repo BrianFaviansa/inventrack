@@ -44,4 +44,21 @@ class ManagerController{
             header('location: restricted');
         }
     }
+
+    static function barang() {
+        $user = $_SESSION['user'];
+        $user_role = $user['id_role'];
+        if ($user_role == '1'){
+            $barangs = Barang::getAllBarang();
+            $kategoris = Kategori::getAllKategori();
+            return view('manager/dashboard_layout', [
+                'url' => 'barang/barang',
+                'barangs' => $barangs,
+                'kategoris' => $kategoris,
+            ]);
+        }
+        else{
+            header('location: restricted');
+        }
+    }
 }

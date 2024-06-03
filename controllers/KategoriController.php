@@ -35,16 +35,11 @@ class KategoriController{
     }
 
     public static function destroy() {
-        $id_kategori = $_GET['id_kategori'];
+        $id_kategori = $_POST['id_kategori'];
 
-        $sucess = Kategori::destroy($id_kategori);
-    
-        if ($sucess == 0) {
-            setFlashMessage('error', 'Kategori gagal dihapus');
-            return header('location: dashboard-manager/kategori');
-        } else {
-            setFlashMessage('success', 'Kategori berhasil dihapus');
-            return header('location: dashboard-manager/kategori');
-        }
+        Kategori::destroy($id_kategori);
+
+        setFlashMessage('success', 'Kategori berhasil dihapus');
+        return header('location: dashboard-manager/kategori');
     }
 }

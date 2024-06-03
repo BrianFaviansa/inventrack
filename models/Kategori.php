@@ -70,7 +70,7 @@ class Kategori
     public static function destroy($id_kategori)
     {
         global $conn;
-        var_dump($id_kategori);die;
+        
         $sql = "DELETE FROM kategori WHERE id_kategori = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("i", $id_kategori);

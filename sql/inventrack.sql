@@ -8,6 +8,7 @@ CREATE TABLE `barang` (
   `id_barang` integer PRIMARY KEY AUTO_INCREMENT,
   `id_kategori` integer NOT NULL,
   `nama_barang` varchar(255) NOT NULL,
+  `gambar` varchar(255),
   `stok` integer NOT NULL,
   `harga_beli` decimal(10,2) NOT NULL,
   `harga_jual` decimal(10,2) NOT NULL,
