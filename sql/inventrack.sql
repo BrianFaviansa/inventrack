@@ -55,3 +55,21 @@ ALTER TABLE `detail_penjualan` ADD FOREIGN KEY (`id_barang`) REFERENCES `barang`
 ALTER TABLE `user` ADD FOREIGN KEY (`id_role`) REFERENCES `role` (`id_role`);
 
 ALTER TABLE `barang` ADD FOREIGN KEY (`id_kategori`) REFERENCES `kategori` (`id_kategori`);
+
+-- Insert data ke tabel role
+INSERT INTO `role` (`nama_role`) VALUES
+('Manager'),
+('Stoker'),
+('Kasir');
+
+-- Insert data ke tabel kategori
+INSERT INTO `kategori` (`nama_kategori`) VALUES
+('Minyak'),
+('Beras'),
+('Snack');
+
+-- Insert data ke tabel user
+INSERT INTO `user` (`id_role`, `nama`, `email`, `password`, `no_telpon`) VALUES
+(1, 'Manager', 'manager@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '123456789'), -- password: password
+(2, 'Stoker', 'stoker@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '987654321'), -- password: password
+(3, 'Kasir', 'kasir@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '456123789'); -- password: password
