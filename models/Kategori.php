@@ -42,4 +42,16 @@ class Kategori
 
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+
+    public static function store($nama)
+    {
+        global $conn;
+        
+        $sql = "INSERT INTO kategori (nama_kategori) VALUES (?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $nama);
+        $stmt->execute();
+
+        return $stmt->affected_rows;
+    }
 }

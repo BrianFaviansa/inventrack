@@ -36,7 +36,7 @@ class ManagerController{
         if ($user_role == '1'){
             $kategoris = Kategori::getAllKategori();
             return view('manager/dashboard_layout', [
-                'url' => 'kategori',
+                'url' => 'kategori/kategori',
                 'kategoris' => $kategoris,
             ]);
         }
