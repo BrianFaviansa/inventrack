@@ -88,6 +88,17 @@ class Barang
         return $stmt->affected_rows;
     }
 
+    public static function update($id_barang, $data) {
+        global $conn;
+
+        $sql = "UPDATE barang SET id_kategori = ?, nama_barang = ?, stok = ?, harga_beli = ?, harga_jual = ? WHERE id_barang = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("isiiii", $data['id_kategori'], $data['nama_barang'], $data['stok'], $data['harga_beli'], $data['harga_jual'], $id_barang);
+        $stmt->execute();
+
+        return $stmt->affected_rows;
+    }
+
     public static function destroy($id_barang) {
         global $conn;
 
