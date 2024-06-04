@@ -52,10 +52,12 @@ class ManagerController
         $user_role = $user['id_role'];
         if ($user_role == '1') {
             $barangs = Barang::getBarangWithNamaKategori();
+            $kategoris = Kategori::getAllKategori();
             
             return view('manager/dashboard_layout', [
                 'url' => 'barang/barang',
                 'barangs' => $barangs,
+                'kategoris' => $kategoris,
             ]);
         } else {
             header('location: restricted');

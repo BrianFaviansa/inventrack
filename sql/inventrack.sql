@@ -79,7 +79,7 @@ INSERT INTO `user` (`id_role`, `nama`, `email`, `password`, `no_telpon`) VALUES
 INSERT INTO `barang` (`id_kategori`, `nama_barang`, `stok`, `harga_beli`, `harga_jual`) VALUES
 (1, 'Minyak Goreng', 100, 15000, 20000),
 (1, 'Minyak Sayur', 100, 12000, 15000),
-(2, 'Beras', 100, 10000, 12000),
+(2, 'Beras Macan', 100, 10000, 12000),
 (2, 'Beras Pandan Wangi', 100, 15000, 18000),
 (3, 'Chitato', 100, 5000, 7000),
 (3, 'Lays', 100, 6000, 8000);

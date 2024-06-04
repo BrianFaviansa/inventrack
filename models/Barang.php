@@ -76,4 +76,15 @@ class Barang
 
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+
+    public static function store($data) {
+        global $conn;
+
+        $sql = "INSERT INTO barang (id_kategori, nama_barang, stok, harga_beli, harga_jual, created_at, gambar) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("isiiiss", $data['id_kategori'], $data['nama_barang'], $data['stok'], $data['harga_beli'], $data['harga_jual'], $data['created_at'], $data['gambar']);
+        $stmt->execute();
+
+        return $stmt->affected_rows;
+    }
 }

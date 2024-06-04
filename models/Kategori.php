@@ -54,7 +54,6 @@ class Kategori
 
         return $stmt->affected_rows;
     }
-    }
 
     public static function update($id_kategori, $nama)
     {
