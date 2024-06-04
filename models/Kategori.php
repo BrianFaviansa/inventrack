@@ -43,16 +43,17 @@ class Kategori
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public static function store($nama)
+    public static function store($data)
     {
         global $conn;
-        
-        $sql = "INSERT INTO kategori (nama_kategori) VALUES (?)";
+
+        $sql = "INSERT INTO kategori (nama_kategori, created_at) VALUES (?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("s", $nama);
+        $stmt->bind_param("ss", $data['nama'], $data['created_at']);
         $stmt->execute();
 
         return $stmt->affected_rows;
+    }
     }
 
     public static function update($id_kategori, $nama)

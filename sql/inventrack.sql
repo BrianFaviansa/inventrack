@@ -12,7 +12,7 @@ CREATE TABLE `barang` (
   `stok` integer NOT NULL,
   `harga_beli` decimal(10,2) NOT NULL,
   `harga_jual` decimal(10,2) NOT NULL,
-  `status` integer DEFAULT 0,
+  `status` ENUM('Dijual', 'Tidak dijual') NOT NULL DEFAULT 'Tidak dijual',
   `created_at` timestamp
 );
 

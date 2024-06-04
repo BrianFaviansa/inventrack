@@ -1,4 +1,6 @@
-<?php $title = 'Inventrack | Barang'; ?>
+<?php $title = 'Inventrack | Barang';
+
+?>
 
 <div class="mt-28 container mx-auto">
     <h2 class="text-4xl font-bold dark:text-white">Daftar Barang</h2>
@@ -114,7 +116,25 @@
                             <?= $no; ?>
                         </th>
                         <td class="px-6 py-4">
-                            <?= $kategori['nama_kategori']; ?>
+                            <?= $barang['nama_barang']; ?>
+                        </td>
+                        <td class="px-6 py-4">
+                            <?= $barang['nama_kategori']; ?>
+                        </td>
+                        <td class="px-6 py-4">
+                            <?= $barang['foto'] ?? ''; ?>
+                        </td>
+                        <td class="px-6 py-4">
+                            <?= $barang['stok']; ?>
+                        </td>
+                        <td class="px-6 py-4">
+                            Rp <?= $barang['harga_jual']; ?>
+                        </td>
+                        <td class="px-6 py-4">
+                            Rp <?= $barang['harga_beli']; ?>
+                        </td>
+                        <td class="px-6 py-4">
+                            <?= $barang['status']; ?>
                         </td>
                         <td class="px-6 py-4">
                             <!-- Modal edit toggle -->

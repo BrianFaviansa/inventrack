@@ -7,11 +7,13 @@ include_once 'models/Kategori.php';
 include_once 'models/Barang.php';
 include_once 'models/Penjualan.php';
 
-class ManagerController{
-    static function index(){
+class ManagerController
+{
+    static function index()
+    {
         $user = $_SESSION['user'];
         $user_role = $user['id_role'];
-        if ($user_role == '1'){
+        if ($user_role == '1') {
             $totalKategori = Kategori::countKategori();
             $totalUser = User::countUser();
             $totalBarang = Barang::countBarang();
@@ -24,40 +26,38 @@ class ManagerController{
                 'totalBarang' => $totalBarang,
                 'totalPenjualan' => $totalPenjualan,
             ]);
-        }
-        else{
+        } else {
             header('location: restricted');
         }
     }
 
-    static function kategori(){
+    static function kategori()
+    {
         $user = $_SESSION['user'];
         $user_role = $user['id_role'];
-        if ($user_role == '1'){
+        if ($user_role == '1') {
             $kategoris = Kategori::getAllKategori();
             return view('manager/dashboard_layout', [
                 'url' => 'kategori/kategori',
                 'kategoris' => $kategoris,
             ]);
-        }
-        else{
+        } else {
             header('location: restricted');
         }
     }
 
-    static function barang() {
+    static function barang()
+    {
         $user = $_SESSION['user'];
         $user_role = $user['id_role'];
-        if ($user_role == '1'){
-            $barangs = Barang::getAllBarang();
-            $kategoris = Kategori::getAllKategori();
+        if ($user_role == '1') {
+            $barangs = Barang::getBarangWithNamaKategori();
+            
             return view('manager/dashboard_layout', [
                 'url' => 'barang/barang',
                 'barangs' => $barangs,
-                'kategoris' => $kategoris,
             ]);
-        }
-        else{
+        } else {
             header('location: restricted');
         }
     }

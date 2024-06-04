@@ -21,7 +21,7 @@ class Barang
     }
 
     public static function countBarang()
-    {   
+    {
         global $conn;
 
         $sql = "SELECT COUNT(id_barang) as total FROM barang";
@@ -32,15 +32,27 @@ class Barang
         return $total;
     }
 
-    public function kategori($id_barang)
+    public static function getNamaKategori($idKategori)
     {
-        $sql = "SELECT k.* FROM kategori k JOIN barang b ON b.id_kategori = k.id_kategori WHERE b.id_barang = ?";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("i", $id_barang);
+        global $conn;
+
+        $sql = "SELECT nama_kategori FROM kategori WHERE id_kategori = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $idKategori);
         $stmt->execute();
         $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        return $row['nama_kategori'];
+    }
 
-        return $result->fetch_assoc();
+    public static function getBarangWithNamaKategori()
+    {
+        global $conn;
+
+        $sql = "SELECT barang.*, kategori.nama_kategori FROM barang JOIN kategori ON barang.id_kategori = kategori.id_kategori";
+        $result = $conn->query($sql);
+
+        return $result;
     }
 
     public function detailPembelian($id_barang)

@@ -6,14 +6,17 @@ include_once 'models/Kategori.php';
 
 class KategoriController{
     public static function create() {
-        $nama = $_POST['nama'];
+        $data = [
+            'nama' => $_POST['nama'],
+            'created_at' => date('Y-m-d H:i:s')
+        ];
 
-        if (empty($nama)) {
+        if (empty($data['nama'])) {
             setFlashMessage('error', 'Nama kategori tidak boleh kosong');
             return header('location: dashboard-manager/kategori');
         }
 
-        Kategori::store($nama);
+        Kategori::store($data);
     
         setFlashMessage('success', 'Kategori berhasil ditambahkan');
         return header('location: dashboard-manager/kategori');
