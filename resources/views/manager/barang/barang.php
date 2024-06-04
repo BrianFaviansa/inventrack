@@ -53,12 +53,11 @@
                             <label for="harga_jual" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Harga Jual</label>
                             <input type="number" name="harga_jual" id="harga_jual" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Masukkan harga jual" required="">
                         </div>
-
                         <div class="col-span-2">
                             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="gambar">Gambar</label>
+                            <div id="preview-image" class="my-2"></div>
                             <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="gambar_help" id="gambar" name="gambar" type="file">
                             <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="gambar_help">SVG, PNG, JPG or GIF</p>
-
                         </div>
                     </div>
                     <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -115,7 +114,9 @@
             <tbody>
                 <?php
                 $no = 1;
-                foreach ($barangs as $barang) : ?>
+                foreach ($barangs as $barang) :
+                    // $gambarTerpilih = $barang['gambar'] ? urlpath('assets/storage/barang_images/' . $barang['gambar']) : ''; 
+                ?>
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             <?= $no; ?>
@@ -128,7 +129,7 @@
                         </td>
                         <td class="px-6 py-4 flex justify-center">
                             <?php if (!empty($barang['gambar'])) : ?>
-                                <img class="h-auto max-w-40" src="<?= urlpath('assets/storage/barang_images/'.$barang['gambar']); ?>" alt="<?= htmlspecialchars($barang['nama_barang']); ?>">
+                                <img class="h-auto max-w-40" src="<?= urlpath('assets/storage/barang_images/' . $barang['gambar']); ?>" alt="<?= htmlspecialchars($barang['nama_barang']); ?>">
                             <?php endif; ?>
                         </td>
                         <td class="px-6 py-4">
@@ -145,20 +146,20 @@
                         </td>
                         <td class="px-6 py-4">
                             <!-- Modal edit toggle -->
-                            <button data-modal-target="editCategory<?= $kategori['id_kategori']; ?>" data-modal-toggle="editCategory<?= $kategori['id_kategori']; ?>" class=" text-white bg-yellow-600 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800" type="button">
+                            <button data-modal-target="editBarang<?= $barang['id_barang']; ?>" data-modal-toggle="editBarang<?= $barang['id_barang']; ?>" class=" text-white bg-yellow-600 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800" type="button">
                                 Edit
                             </button>
                             <!-- modal edit -->
-                            <div id="editCategory<?= $kategori['id_kategori']; ?>" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                            <div id="editBarang<?= $barang['id_barang']; ?>" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                                 <div class="relative p-4 w-full max-w-md max-h-full">
                                     <!-- Modal content -->
                                     <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                                         <!-- Modal header -->
                                         <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                                             <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                                                Buat Kategori Baru
+                                                Edit Barang
                                             </h3>
-                                            <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="editCategory<?= $kategori['id_kategori']; ?>">
+                                            <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="editBarang<?= $barang['id_barang']; ?>">
                                                 <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                                                 </svg>
@@ -166,12 +167,40 @@
                                             </button>
                                         </div>
                                         <!-- Modal body -->
-                                        <form class="p-4 md:p-5" action="<?= urlpath('updateKategori'); ?>" method="post">
+                                        <form class="p-4 md:p-5" action="<?= urlpath('updateBarang'); ?>" method="post" enctype="multipart/form-data">
                                             <div class="grid gap-4 mb-4 grid-cols-2">
-                                                <input type="hidden" name="id_kategori" id="id_kategori" value="<?= $kategori['id_kategori']; ?>">
                                                 <div class="col-span-2">
-                                                    <label for="nama_kategori" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Kategori</label>
-                                                    <input type="text" name="nama_kategori" id="nama_kategori" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" value="<?= $kategori['nama_kategori']; ?>">
+                                                    <label for="nama_barang" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Barang</label>
+                                                    <input type="text" name="nama_barang" id="nama_barang" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Masukkan nama barang" value="<?= $barang['nama_barang']; ?>" required="">
+                                                </div>
+                                                <div class="col-span-2 sm:col-span-1">
+                                                    <label for="id_kategori" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kategori</label>
+                                                    <select id="id_kategori" name="id_kategori" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                                        <?php foreach ($kategoris as $kategori) : ?>
+                                                            <option value="<?= $kategori['id_kategori']; ?>" <?= $kategori['id_kategori'] == $barang['id_kategori'] ? 'selected' : ''; ?>>
+                                                                <?= $kategori['nama_kategori']; ?>
+                                                            </option>
+                                                        <?php endforeach; ?>
+                                                    </select>
+                                                </div>
+                                                <div class="col-span-2 sm:col-span-1">
+                                                    <label for="stok" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jumlah Barang</label>
+                                                    <input type="number" name="stok" id="stok" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Masukkan jumlah barang" value="<?= $barang['stok']; ?>" required="">
+                                                </div>
+                                                <div class="col-span-2 sm:col-span-1">
+                                                    <label for="harga_beli" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Harga Beli</label>
+                                                    <input type="number" name="harga_beli" id="harga_beli" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Masukkan harga beli" value="<?= $barang['harga_beli']; ?>" required="">
+                                                </div>
+                                                <div class="col-span-2 sm:col-span-1">
+                                                    <label for="harga_jual" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Harga Jual</label>
+                                                    <input type="number" name="harga_jual" id="harga_jual" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Masukkan harga jual" value="<?= $barang['harga_jual']; ?>" required="">
+                                                </div>
+
+                                                <div class="col-span-2">
+                                                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="gambar">Gambar</label>
+                                                    <div id="preview-image" class="my-2"></div>
+                                                    <input class="gambarEdit block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="gambar_help" id="gambar" name="gambar" type="file">
+                                                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="gambar_help">SVG, PNG, JPG or GIF</p>
                                                 </div>
                                             </div>
                                             <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -224,3 +253,49 @@
         </table>
     </div>
 </div>
+
+
+<script>
+    $(document).ready(function() {
+        let gambars = document.querySelectorAll('#gambar');
+        let previewImages = document.querySelectorAll('#preview-image');
+
+        gambars.forEach(element => {
+            element.addEventListener('change', function() {
+                let file = this.files[0];
+                if (file) {
+                    let reader = new FileReader();
+                    reader.onload = function(e) {
+                        previewImages.forEach(previewImage => {
+                            previewImage.innerHTML = '<img src="' + e.target.result + '" alt="Preview" style="max-width: 150px; max-height: 150px;"/>';
+                        });
+                    }
+                    reader.readAsDataURL(file);
+
+                    previewImages.forEach(previewImage => {
+                        previewImage.innerHTML = '';
+                    });
+                }
+            });
+        });
+
+        // Reset the preview image when the modal is closed
+        document.querySelectorAll('[data-modal-toggle]').forEach(button => {
+            button.addEventListener('click', function() {
+                const modalId = button.getAttribute('data-modal-target');
+                const modal = document.getElementById(modalId);
+
+                if (modal) {
+                    modal.addEventListener('hidden.bs.modal', function() {
+                        previewImages.forEach(previewImage => {
+                            previewImage.innerHTML = '';
+                        });
+                        gambars.forEach(gambar => {
+                            gambar.value = ''; // Clear the file input
+                        });
+                    });
+                }
+            });
+        });
+    });
+</script>
