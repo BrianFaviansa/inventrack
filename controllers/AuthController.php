@@ -112,7 +112,8 @@ class AuthController
                 header('Location: dashboard-kasir');
             }
         } else {
-            header('Location: ' . BASEURL . 'login?failed=true');
+            setFlashMessage('error', 'Email atau password salah');
+            header('Location: login');
         }
     }
     static function logout()

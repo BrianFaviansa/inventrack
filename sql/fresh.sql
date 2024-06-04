@@ -1,0 +1,7 @@
+-- Truncate tabel dan mengatur kembali auto_increment menjadi 1
+TRUNCATE TABLE `kategori` RESTART IDENTITY;
+TRUNCATE TABLE `barang` RESTART IDENTITY;
+TRUNCATE TABLE `role` RESTART IDENTITY;
+TRUNCATE TABLE `user` RESTART IDENTITY;
+TRUNCATE TABLE `penjualan` RESTART IDENTITY;
+TRUNCATE TABLE `detail_penjualan` RESTART IDENTITY;

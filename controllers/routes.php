@@ -17,9 +17,9 @@ Router::url('dashboard-manager', 'get', 'ManagerController::index');
 
 // dashboard manager - kategori
 Router::url('dashboard-manager/kategori', 'get', 'ManagerController::kategori');
-Router::url('storeKategori', 'post', 'KategoriController::store');
-Router::url('updateKategori', 'post', 'KategoriController::update');
-Router::url('destroyKategori', 'post', 'KategoriController::destroy');
+Router::url('storeKategori', 'post', 'KategoriController::create');
+Router::url('updateKategori', 'post', 'KategoriController::edit');
+Router::url('destroyKategori', 'post', 'KategoriController::delete');
 
 // dashboard manager - barang
 Router::url('dashboard-manager/barang', 'get', 'ManagerController::barang');    

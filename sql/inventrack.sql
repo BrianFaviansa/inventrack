@@ -74,3 +74,12 @@ INSERT INTO `user` (`id_role`, `nama`, `email`, `password`, `no_telpon`) VALUES
 (1, 'Manager', 'manager@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '123456789'), -- password: password
 (2, 'Stoker', 'stoker@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '987654321'), -- password: password
 (3, 'Kasir', 'kasir@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '456123789'); -- password: password
+
+-- Insert data ke tabel barang
+INSERT INTO `barang` (`id_kategori`, `nama_barang`, `stok`, `harga_beli`, `harga_jual`) VALUES
+(1, 'Minyak Goreng', 100, 15000, 20000),
+(1, 'Minyak Sayur', 100, 12000, 15000),
+(2, 'Beras', 100, 10000, 12000),
+(2, 'Beras Pandan Wangi', 100, 15000, 18000),
+(3, 'Chitato', 100, 5000, 7000),
+(3, 'Lays', 100, 6000, 8000);

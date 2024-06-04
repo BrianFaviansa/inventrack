@@ -5,7 +5,7 @@ include_once 'app/config/static.php';
 include_once 'models/Kategori.php';
 
 class KategoriController{
-    public static function store() {
+    public static function create() {
         $nama = $_POST['nama'];
 
         if (empty($nama)) {
@@ -19,7 +19,7 @@ class KategoriController{
         return header('location: dashboard-manager/kategori');
     }
 
-    public static function update() {
+    public static function edit() {
         $id_kategori = $_POST['id_kategori'];
         $nama = $_POST['nama_kategori'];
 
@@ -34,7 +34,7 @@ class KategoriController{
         return header('location: dashboard-manager/kategori');
     }
 
-    public static function destroy() {
+    public static function delete() {
         $id_kategori = $_POST['id_kategori'];
 
         Kategori::destroy($id_kategori);

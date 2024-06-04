@@ -10,7 +10,7 @@ class User
         $email = $data['email'];
         $password = $data['password'];
 
-        $result = $conn->query("SELECT * FROM users WHERE email = '$email'");
+        $result = $conn->query("SELECT * FROM user WHERE email = '$email'");
         if ($result = $result->fetch_assoc()) {
             $hashedPassword = $result['password'];
             $verify = password_verify($password, $hashedPassword);
