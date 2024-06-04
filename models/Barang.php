@@ -87,4 +87,15 @@ class Barang
 
         return $stmt->affected_rows;
     }
+
+    public static function destroy($id_barang) {
+        global $conn;
+
+        $sql = "DELETE FROM barang WHERE id_barang = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $id_barang);
+        $stmt->execute();
+
+        return $stmt->affected_rows;
+    }
 }

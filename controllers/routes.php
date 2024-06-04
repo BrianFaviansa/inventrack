@@ -25,6 +25,7 @@ Router::url('destroyKategori', 'post', 'KategoriController::delete');
 Router::url('dashboard-manager/barang', 'get', 'ManagerController::barang');    
 Router::url('storeBarang', 'post', 'BarangController::create');
 Router::url('updateBarang', 'post', 'BarangController::edit');
+Router::url('destroyBarang', 'post', 'BarangController::delete');
 
 // dashboard stoker
 Router::url('dashboard-stoker', 'get', 'StokerController::index');
