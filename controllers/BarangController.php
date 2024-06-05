@@ -99,6 +99,8 @@ class BarangController
             $newFileName = basename($gambarName, ".$fileExtension") . "_" . $timestamp . ".$fileExtension";
             $gambarPath = $uploadDir . $newFileName;
 
+            
+
             // Move the uploaded image to the specified directory
             if (move_uploaded_file($gambarTmpName, $gambarPath)) {
                 $data['gambar'] = $newFileName; // Store only the file name in the database

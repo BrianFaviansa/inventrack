@@ -27,6 +27,9 @@ Router::url('storeBarang', 'post', 'BarangController::create');
 Router::url('updateBarang', 'post', 'BarangController::edit');
 Router::url('destroyBarang', 'post', 'BarangController::delete');
 
+// dashboard manager - transaksi
+Router::url('dashboard-manager/transaksi', 'get', 'ManagerController::transaksi');
+
 // dashboard stoker
 Router::url('dashboard-stoker', 'get', 'StokerController::index');
 

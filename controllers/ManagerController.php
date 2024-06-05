@@ -40,6 +40,7 @@ class ManagerController
             return view('manager/dashboard_layout', [
                 'url' => 'kategori/kategori',
                 'kategoris' => $kategoris,
+                'user' => $user,
             ]);
         } else {
             header('location: restricted');
@@ -58,6 +59,24 @@ class ManagerController
                 'url' => 'barang/barang',
                 'barangs' => $barangs,
                 'kategoris' => $kategoris,
+                'user' => $user,
+            ]);
+        } else {
+            header('location: restricted');
+        }
+    }
+
+    static function transaksi() {
+        $user = $_SESSION['user'];
+        $user_role = $user['id_role'];
+        if ($user_role == '1') {
+            $penjualans = Penjualan::getAllPenjualan();
+            $barangs = Barang::getBarangWithNamaKategori();
+            return view('manager/dashboard_layout', [
+                'url' => 'transaksi/transaksi',
+                'penjualans' => $penjualans,
+                'user' => $user,
+                'barangs' => $barangs,  
             ]);
         } else {
             header('location: restricted');
