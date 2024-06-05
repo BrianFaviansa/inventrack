@@ -7,6 +7,10 @@ include_once 'models/Role.php';
 
 class AuthController
 {
+    static function index()
+    {
+        return view('beranda/beranda_layout', ['url' => 'beranda']);
+    }
     static function login()
     {
         return view('auth/auth_layout', ['url' => 'login']);
@@ -64,10 +68,10 @@ class AuthController
 
         try {
             $existingEmail = User::getUserByEmail($post['email']);
-    
-            if($existingEmail) {
-                if($existingEmail['email'] === $post['email']) {
-                    throw new Exception( 'Email telah terdaftar' );
+
+            if ($existingEmail) {
+                if ($existingEmail['email'] === $post['email']) {
+                    throw new Exception('Email telah terdaftar');
                 }
             }
 
@@ -78,17 +82,15 @@ class AuthController
                 'id_role' => $post['id_role']
             ]);
 
-            if ( $user ) {
-                header( 'Location: login' );
+            if ($user) {
+                header('Location: login');
             }
             exit();
-
         } catch (Exception $e) {
             http_response_code(400);
             echo json_encode(['message' => 'Registrasi gagal! Email telah terdaftar!']);
             exit();
         }
-        
     }
 
     static function sessionLogin()

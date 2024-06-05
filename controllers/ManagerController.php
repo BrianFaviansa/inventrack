@@ -33,53 +33,47 @@ class ManagerController
 
     static function kategori()
     {
-        $user = $_SESSION['user'];
-        $user_role = $user['id_role'];
-        if ($user_role == '1') {
+        if (!isset($_SESSION['user'])) {
+            header('location: login');
+        } else {
             $kategoris = Kategori::getAllKategori();
             return view('manager/dashboard_layout', [
                 'url' => 'kategori/kategori',
                 'kategoris' => $kategoris,
-                'user' => $user,
+                'user' => $_SESSION['user'],
             ]);
-        } else {
-            header('location: restricted');
         }
     }
 
     static function barang()
     {
-        $user = $_SESSION['user'];
-        $user_role = $user['id_role'];
-        if ($user_role == '1') {
+        if (!isset($_SESSION['user'])) {
+            header('location: login');
+        } else {
             $barangs = Barang::getBarangWithNamaKategori();
             $kategoris = Kategori::getAllKategori();
-            
             return view('manager/dashboard_layout', [
                 'url' => 'barang/barang',
                 'barangs' => $barangs,
                 'kategoris' => $kategoris,
-                'user' => $user,
+                'user' => $_SESSION['user'],
             ]);
-        } else {
-            header('location: restricted');
         }
     }
 
-    static function transaksi() {
-        $user = $_SESSION['user'];
-        $user_role = $user['id_role'];
-        if ($user_role == '1') {
-            $penjualans = Penjualan::getAllPenjualan();
+    static function transaksi()
+    {
+        if (!isset($_SESSION['user'])) {
+            header('location: login');
+        } else {
             $barangs = Barang::getBarangWithNamaKategori();
+            $kategoris = Kategori::getAllKategori();
             return view('manager/dashboard_layout', [
                 'url' => 'transaksi/transaksi',
-                'penjualans' => $penjualans,
-                'user' => $user,
-                'barangs' => $barangs,  
+                'barangs' => $barangs,
+                'kategoris' => $kategoris,
+                'user' => $_SESSION['user'],
             ]);
-        } else {
-            header('location: restricted');
         }
     }
 }
