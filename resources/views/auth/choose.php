@@ -16,16 +16,6 @@
             </div>
 
 
-            <div class="max-w-md bg-sky-200 border border-gray-200 rounded-lg shadow-lg p-4 dark:bg-gray-800 dark:border-gray-700">
-                <a href="<?= urlpath('register/stoker'); ?>">
-                    <img class="rounded-t-lg h-auto" src="assets/img/register-stoker.png" alt="" />
-                    <div class="p-5">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Stoker</h5>
-                    </div>
-                </a>
-            </div>
-
-
 
             <div class="max-w-md bg-sky-200 border border-gray-200 rounded-lg shadow-lg p-4 dark:bg-gray-800 dark:border-gray-700">
                 <a href="<?= urlpath('register/kasir'); ?>">

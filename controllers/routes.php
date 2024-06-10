@@ -47,6 +47,8 @@ Router::url('dashboard-stoker', 'get', 'StokerController::index');
 
 // dashboard kasir
 Router::url('dashboard-kasir', 'get', 'KasirController::index');
+Router::url('dashboard-kasir/transaksi', 'get', 'KasirController::transaksi');
+Router::url('dashboard-kasir/keranjang', 'get', 'KasirController::keranjang');
 
 // restricted
 Router::url('restricted', 'get', 'AuthController::restricted');

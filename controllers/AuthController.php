@@ -108,10 +108,10 @@ class AuthController
                 header('Location: dashboard-manager');
             } elseif ($user['id_role'] == '2') {
                 $_SESSION['user'] = $user;
-                header('Location: dashboard-stoker');
+                header('Location: dashboard-kasir');
             } elseif ($user['id_role'] == '3') {
                 $_SESSION['user'] = $user;
-                header('Location: dashboard-kasir');
+                header('Location: dashboard-stoker');
             }
         } else {
             setFlashMessage('error', 'Email atau password salah');
