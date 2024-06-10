@@ -28,12 +28,13 @@ class User
 
         $nama = $data['nama'];
         $password = $data['password'];
+        $no_telpon = $data['no_telpon'];
         $email = $data['email'];
 
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $sql = "INSERT INTO user SET nama = ?, password = ?, email = ?";
+        $sql = "INSERT INTO user SET nama = ?, password = ?, no_telpon =?, email = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param('sss', $nama, $hashedPassword, $email);
+        $stmt->bind_param('ssss', $nama, $hashedPassword, $email);
         $stmt->execute();
 
         $result = $stmt->affected_rows > 0 ? true : false;

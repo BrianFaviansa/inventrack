@@ -47,7 +47,7 @@ class Penjualan
     public static function getAllPenjualanByTanggal() {
         global $conn;
 
-        $sql = "SELECT tanggal_penjualan, SUM(total_harga) AS total_penjualan FROM penjualan GROUP BY tanggal_penjualan";
+        $sql = "SELECT tanggal_penjualan, SUM(total_harga) AS total_penjualan FROM penjualan GROUP BY tanggal_penjualan order by tanggal_penjualan asc";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {

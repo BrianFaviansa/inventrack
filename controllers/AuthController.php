@@ -79,6 +79,7 @@ class AuthController
                 'nama' => $post['nama'],
                 'email' => $post['email'],
                 'password' => password_hash($post['password'], PASSWORD_DEFAULT),
+                'no_telpon' => $post['no_telpon'],
                 'id_role' => $post['id_role']
             ]);
 
@@ -128,4 +129,6 @@ class AuthController
     {
         return view('auth/auth_layout', ['url' => 'restricted']);
     }
+
+
 }
