@@ -47,7 +47,7 @@ class Cart
     {
         global $conn;
 
-        $sql = "SELECT barang.id_barang, barang.nama_barang, barang.harga_jual, barang.stok, barang.gambar, keranjang.kuantitas FROM keranjang JOIN barang ON keranjang.id_barang = barang.id_barang WHERE keranjang.session_id = ?";
+        $sql = "SELECT barang.id_barang, barang.nama_barang, barang.harga_jual, barang.gambar, keranjang.kuantitas FROM keranjang JOIN barang ON keranjang.id_barang = barang.id_barang WHERE keranjang.session_id = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("s", $session_id);
         $stmt->execute();

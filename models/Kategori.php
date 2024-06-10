@@ -16,8 +16,9 @@ class Kategori
 
         $sql = "SELECT * FROM kategori";
         $result = $conn->query($sql);
+        $row = $result->fetch_all(MYSQLI_ASSOC);
 
-        return $result;
+        return $row;
     }
 
     public static function countKategori()

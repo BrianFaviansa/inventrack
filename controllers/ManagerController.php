@@ -19,6 +19,8 @@ class ManagerController
             $totalUser = User::countUser();
             $totalBarang = Barang::countBarang();
             $totalPenjualan = Penjualan::countPenjualan();
+            $barangs = Barang::getAllBarang();
+            $kategoris = Kategori::getAllKategori();
             return view('manager/dashboard_layout', [
                 'url' => 'stats',
                 'user' => $user,
@@ -26,6 +28,8 @@ class ManagerController
                 'totalUser' => $totalUser,
                 'totalBarang' => $totalBarang,
                 'totalPenjualan' => $totalPenjualan,
+                'barangs' => $barangs,
+                'kategoris' => $kategoris,
             ]);
         } else {
             header('location: restricted');

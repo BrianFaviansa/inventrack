@@ -1,6 +1,6 @@
 <?php $title = 'Inventrack | Transaksi'; ?>
 
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 mt-28 container mx-auto">
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 pt-28 container mx-auto">
     <?php foreach ($barangs as $barang) : ?>
         <div class="w-full max-w-96 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <div class="flex justify-center">

@@ -91,9 +91,9 @@ class Barang
     {
         global $conn;
 
-        $sql = "INSERT INTO barang (id_kategori, nama_barang, stok, harga_beli, harga_jual, created_at, gambar) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO barang (id_kategori, nama_barang, harga_beli, harga_jual, created_at, gambar) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("isiiiss", $data['id_kategori'], $data['nama_barang'], $data['stok'], $data['harga_beli'], $data['harga_jual'], $data['created_at'], $data['gambar']);
+        $stmt->bind_param("isisss", $data['id_kategori'], $data['nama_barang'], $data['harga_beli'], $data['harga_jual'], $data['created_at'], $data['gambar']);
         $stmt->execute();
 
         return $stmt->affected_rows;
@@ -103,13 +103,14 @@ class Barang
     {
         global $conn;
 
-        $sql = "UPDATE barang SET id_kategori = ?, nama_barang = ?, gambar = ?, stok = ?, harga_beli = ?, harga_jual = ? WHERE id_barang = ?";
+        $sql = "UPDATE barang SET id_kategori = ?, nama_barang = ?, gambar = ?, harga_beli = ?, harga_jual = ? WHERE id_barang = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("issiiii", $data['id_kategori'], $data['nama_barang'], $data['gambar'], $data['stok'], $data['harga_beli'], $data['harga_jual'], $id_barang);
+        $stmt->bind_param("issiii", $data['id_kategori'], $data['nama_barang'], $data['gambar'], $data['harga_beli'], $data['harga_jual'], $id_barang);
         $stmt->execute();
 
         return $stmt->affected_rows;
     }
+
 
 
     public static function destroy($id_barang)

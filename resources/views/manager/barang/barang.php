@@ -1,7 +1,7 @@
 <?php $title = 'Inventrack | Barang';
 ?>
 
-<div class="mt-28 container mx-auto">
+<div class="pt-28 container mx-auto">
     <h2 class="text-4xl font-bold dark:text-white">Daftar Produk</h2>
 
     <!-- Modal toggle -->
@@ -33,17 +33,13 @@
                             <label for="nama_barang" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Barang</label>
                             <input type="text" name="nama_barang" id="nama_barang" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Masukkan nama barang" required="">
                         </div>
-                        <div class="col-span-2 sm:col-span-1">
+                        <div class="col-span-2">
                             <label for="id_kategori" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kategori</label>
                             <select id="id_kategori" name="id_kategori" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                 <?php foreach ($kategoris as $kategori) : ?>
                                     <option value="<?= $kategori['id_kategori']; ?>"><?= $kategori['nama_kategori']; ?></option>
                                 <?php endforeach; ?>
                             </select>
-                        </div>
-                        <div class="col-span-2 sm:col-span-1">
-                            <label for="stok" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jumlah Barang</label>
-                            <input type="number" name="stok" id="stok" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Masukkan jumlah barang" required="">
                         </div>
                         <div class="col-span-2 sm:col-span-1">
                             <label for="harga_beli" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Harga Beli</label>
@@ -95,16 +91,10 @@
                         Foto
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Stok
-                    </th>
-                    <th scope="col" class="px-6 py-3">
                         Harga Jual
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Harga Beli
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Status
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Aksi
@@ -127,20 +117,14 @@
                         </td>
                         <td class="px-6 py-4 flex justify-center">
                             <?php if (!empty($barang['gambar'])) : ?>
-                                <img class="h-auto max-w-40" src="<?= urlpath('assets/storage/barang_images/' . $barang['gambar']); ?>" alt="<?= htmlspecialchars($barang['nama_barang']); ?>">
+                                <img class="max-w-28 h-auto" src="<?= urlpath('assets/storage/barang_images/' . $barang['gambar']); ?>" alt="<?= htmlspecialchars($barang['nama_barang']); ?>">
                             <?php endif; ?>
-                        </td>
-                        <td class="px-6 py-4">
-                            <?= $barang['stok']; ?>
                         </td>
                         <td class="px-6 py-4">
                             Rp <?= $barang['harga_jual']; ?>
                         </td>
                         <td class="px-6 py-4">
                             Rp <?= $barang['harga_beli']; ?>
-                        </td>
-                        <td class="px-6 py-4">
-                            <?= $barang['status']; ?>
                         </td>
                         <td class="px-6 py-4">
                             <!-- Modal edit toggle -->
@@ -172,7 +156,7 @@
                                                     <label for="nama_barang" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Barang</label>
                                                     <input type="text" name="nama_barang" id="nama_barang" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Masukkan nama barang" value="<?= $barang['nama_barang']; ?>" required="">
                                                 </div>
-                                                <div class="col-span-2 sm:col-span-1">
+                                                <div class="col-span-2">
                                                     <label for="id_kategori" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kategori</label>
                                                     <select id="id_kategori" name="id_kategori" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                                         <?php foreach ($kategoris as $kategori) : ?>
@@ -181,10 +165,6 @@
                                                             </option>
                                                         <?php endforeach; ?>
                                                     </select>
-                                                </div>
-                                                <div class="col-span-2 sm:col-span-1">
-                                                    <label for="stok" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jumlah Barang</label>
-                                                    <input type="number" name="stok" id="stok" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Masukkan jumlah barang" value="<?= $barang['stok']; ?>" required="">
                                                 </div>
                                                 <div class="col-span-2 sm:col-span-1">
                                                     <label for="harga_beli" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Harga Beli</label>

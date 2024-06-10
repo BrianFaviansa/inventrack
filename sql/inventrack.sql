@@ -9,10 +9,8 @@ CREATE TABLE `barang` (
   `id_kategori` integer NOT NULL,
   `nama_barang` varchar(255) NOT NULL,
   `gambar` varchar(255),
-  `stok` integer NOT NULL,
   `harga_beli` decimal(10,2) NOT NULL,
   `harga_jual` decimal(10,2) NOT NULL,
-  `status` ENUM('Dijual', 'Tidak dijual') NOT NULL DEFAULT 'Tidak dijual',
   `created_at` timestamp
 );
 
@@ -66,7 +64,6 @@ ALTER TABLE `barang` ADD FOREIGN KEY (`id_kategori`) REFERENCES `kategori` (`id_
 -- Insert data ke tabel role
 INSERT INTO `role` (`nama_role`) VALUES
 ('Manager'),
-('Stoker'),
 ('Kasir');
 
 -- Insert data ke tabel kategori
@@ -78,14 +75,13 @@ INSERT INTO `kategori` (`nama_kategori`) VALUES
 -- Insert data ke tabel user
 INSERT INTO `user` (`id_role`, `nama`, `email`, `password`, `no_telpon`) VALUES
 (1, 'Manager', 'manager@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '123456789'), -- password: password
-(2, 'Stoker', 'stoker@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '987654321'), -- password: password
-(3, 'Kasir', 'kasir@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '456123789'); -- password: password
+(2, 'Kasir', 'kasir@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '456123789'); -- password: password
 
 -- Insert data ke tabel barang
-INSERT INTO `barang` (`id_kategori`, `nama_barang`, `stok`, `harga_beli`, `harga_jual`) VALUES
-(1, 'Minyak Goreng', 100, 15000, 20000),
-(1, 'Minyak Sayur', 100, 12000, 15000),
-(2, 'Beras Macan', 100, 10000, 12000),
-(2, 'Beras Pandan Wangi', 100, 15000, 18000),
-(3, 'Chitato', 100, 5000, 7000),
-(3, 'Lays', 100, 6000, 8000);
+INSERT INTO `barang` (`id_kategori`, `nama_barang`, `harga_beli`, `harga_jual`) VALUES
+(1, 'Minyak Goreng', 15000, 20000),
+(1, 'Minyak Sayur', 12000, 15000),
+(2, 'Beras Macan', 10000, 12000),
+(2, 'Beras Pandan Wangi', 15000, 18000),
+(3, 'Chitato', 5000, 7000),
+(3, 'Lays', 6000, 8000);
