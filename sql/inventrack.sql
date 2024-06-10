@@ -64,7 +64,8 @@ ALTER TABLE `barang` ADD FOREIGN KEY (`id_kategori`) REFERENCES `kategori` (`id_
 -- Insert data ke tabel role
 INSERT INTO `role` (`nama_role`) VALUES
 ('Manager'),
-('Kasir');
+('Kasir'),
+('Stoker');
 
 -- Insert data ke tabel kategori
 INSERT INTO `kategori` (`nama_kategori`) VALUES
@@ -75,7 +76,8 @@ INSERT INTO `kategori` (`nama_kategori`) VALUES
 -- Insert data ke tabel user
 INSERT INTO `user` (`id_role`, `nama`, `email`, `password`, `no_telpon`) VALUES
 (1, 'Manager', 'manager@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '123456789'), -- password: password
-(2, 'Kasir', 'kasir@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '456123789'); -- password: password
+(2, 'Kasir', 'kasir@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '456123789'), -- password: password
+(3, 'Stoker', 'stoker@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '456123789'); -- password: password
 
 -- Insert data ke tabel barang
 INSERT INTO `barang` (`id_kategori`, `nama_barang`, `harga_beli`, `harga_jual`) VALUES

@@ -44,6 +44,8 @@ Router::url('dashboard-manager/statistik', 'get', 'ManagerController::statistik'
 
 // dashboard stoker
 Router::url('dashboard-stoker', 'get', 'StokerController::index');
+Router::url('dashboard-stoker/kategori', 'get', 'StokerController::kategori');
+Router::url('dashboard-stoker/barang', 'get', 'StokerController::barang');
 
 // dashboard kasir
 Router::url('dashboard-kasir', 'get', 'KasirController::index');

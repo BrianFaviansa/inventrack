@@ -58,7 +58,12 @@ class BarangController
         $store = Barang::store($data);
 
         if ($store) {
-            header('location: dashboard-manager/barang');
+            setFlashMessage('success', 'Barang berhasil ditambahkan');
+            if ($_SESSION['user']['id_role'] == 1) {
+                header('location: dashboard-manager/barang');
+            } else if ($_SESSION['user']['id_role'] == 3) {
+                header('location: dashboard-stoker/barang');
+            }
         } else {
             echo 'Gagal menambahkan barang';
         }
@@ -126,10 +131,14 @@ class BarangController
         $update = Barang::update($id_barang, $data);
 
         if ($update) {
-            setFlashMessage('success', 'Barang berhasil diubah');
-            header('location: dashboard-manager/barang');
+            setFlashMessage('success', 'Barang berhasil ditambahkan');
+            if ($_SESSION['user']['id_role'] == 1) {
+                header('location: dashboard-manager/barang');
+            } else if ($_SESSION['user']['id_role'] == 3) {
+                header('location: dashboard-stoker/barang');
+            }
         } else {
-            echo 'Gagal mengubah barang';
+            echo 'Gagal menambahkan barang';
         }
     }
 
@@ -140,7 +149,11 @@ class BarangController
 
         if ($delete) {
             setFlashMessage('success', 'Barang berhasil dihapus');
-            header('location: dashboard-manager/barang');
+            if ($_SESSION['user']['id_role'] == 1) {
+                header('location: dashboard-manager/barang');
+            } else if ($_SESSION['user']['id_role'] == 3) {
+                header('location: dashboard-stoker/barang');
+            }
         } else {
             echo 'Gagal menghapus barang';
         }
