@@ -20,11 +20,11 @@ class Barang
         return $result;
     }
 
-    public static function getBarangGroupByKategori()
+    public static function getBarangOrderByKategori()
     {
         global $conn;
 
-        $sql = "SELECT kategori.nama_kategori, COUNT(barang.id_kategori) as total FROM barang JOIN kategori ON barang.id_kategori = kategori.id_kategori GROUP BY barang.id_kategori";
+        $sql = "SELECT * FROM barang ORDER BY id_kategori";
         $result = $conn->query($sql);
 
         return $result;
@@ -59,7 +59,7 @@ class Barang
     {
         global $conn;
 
-        $sql = "SELECT barang.*, kategori.nama_kategori FROM barang JOIN kategori ON barang.id_kategori = kategori.id_kategori";
+        $sql = "SELECT barang.*, kategori.nama_kategori FROM barang JOIN kategori ON barang.id_kategori = kategori.id_kategori order by kategori.nama_kategori";
         $result = $conn->query($sql);
 
         return $result;

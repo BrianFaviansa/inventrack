@@ -6,5 +6,6 @@ include_once 'controllers/StokerController.php';
 include_once 'controllers/KasirController.php';
 include_once 'controllers/KategoriController.php';
 include_once 'controllers/BarangController.php';
+include_once 'controllers/CartController.php';
 
 session_start();

@@ -11,7 +11,10 @@
                 <div class="flex items-end justify-between">
                     <span class="text-xl font-bold text-gray-900 dark:text-white">Rp <?= $barang['harga_jual']; ?></span>
 
-                    <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 add-to-cart" data-id="<?= $barang['id_barang']; ?>">Tambah ke keranjang</button>
+                    <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 add-to-cart" data-id="<?= $barang['id_barang']; ?>">
+                        <i class="fa fa-plus"></i>
+                        keranjang
+                    </button>
                 </div>
             </div>
         </div>
@@ -24,14 +27,14 @@
             var barangId = $(this).data('id');
 
             $.ajax({
-                url: '<?= urlpath('addToCart'); ?>',
+                url: '<?= urlpath('Transaksi/addToCart'); ?>',
                 method: 'POST',
                 data: {
                     id_barang: barangId
                 },
                 success: function(response) {
                     Swal.fire({
-                        title: 'Berhasil',
+                        title: 'Barang berhasil ditambahkan ke keranjang',
                         text: response.message,
                         icon: 'success',
                         confirmButtonText: 'OK'
