@@ -22,10 +22,10 @@ CREATE TABLE `role` (
 );
 
 CREATE TABLE `keranjang` (
-    'id_keranjang' integer PRIMARY KEY AUTO_INCREMENT,
-    `id_barang` integer NOT NULL,
-    `session_id` varchar(255) NOT NULL,
-    `kuantitas` integer NOT NULL DEFAULT 1,
+  `id_keranjang` integer PRIMARY KEY AUTO_INCREMENT,
+  `id_barang` integer NOT NULL,
+  `session_id` varchar(255) NOT NULL,
+  `kuantitas` integer NOT NULL DEFAULT 1
 );
 
 CREATE TABLE `user` (
