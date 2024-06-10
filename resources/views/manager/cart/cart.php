@@ -29,18 +29,23 @@
                                             </button>
                                         </div>
                                         <div class="text-end md:order-4 md:w-32">
-                                            <p class="item-total text-base font-bold text-gray-900 dark:text-white" data-item-total=""><?= $belanjaan['kuantitas'] * $belanjaan['harga_jual']; ?></p>
+                                            <p class="item-total text-base font-bold text-gray-900 dark:text-white" data-item-total="">Rp <?= $belanjaan['kuantitas'] * $belanjaan['harga_jual']; ?></p>
                                         </div>
                                     </div>
                                     <div class="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
                                         <p class="text-base font-medium text-gray-900 dark:text-white"><?= $belanjaan['nama_barang']; ?></p>
-                                        <button type="button" class="inline-flex items-center text-sm font-medium text-red-600 hover:underline dark:text-red-500">
-                                            <svg class="me-1.5 h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6" />
-                                            </svg>
-                                            Hapus
-                                        </button>
+                                        <span class="text-sm text-gray-600">Harga satuan : <?= $belanjaan['harga_jual']; ?></span>
+
+                                        <div class="flex items-center gap-4">
+                                            <button type="button" class="inline-flex items-center text-sm font-medium text-red-600 hover:underline dark:text-red-500">
+                                                <svg class="me-1.5 h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6" />
+                                                </svg>
+                                                Hapus
+                                            </button>
+                                        </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
