@@ -29,7 +29,7 @@ class AuthController
         return view('auth/auth_layout', ['url' => 'register', 'role_id' => $role_id, 'nama_role' => $nama_role]);
     }
 
-    static function registerStoker()
+    static function registerKasir()
     {
         $role_id = 2;
         $nama_role = Roles::getRoleNameById($role_id);
@@ -38,7 +38,7 @@ class AuthController
         return view('auth/auth_layout', ['url' => 'register', 'role_id' => $role_id, 'nama_role' => $nama_role]);
     }
 
-    static function registerKasir()
+    static function registerStoker()
     {
         $role_id = 3;
         $nama_role = Roles::getRoleNameById($role_id);
