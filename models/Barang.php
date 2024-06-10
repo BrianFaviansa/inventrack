@@ -77,7 +77,8 @@ class Barang
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public static function store($data) {
+    public static function store($data)
+    {
         global $conn;
 
         $sql = "INSERT INTO barang (id_kategori, nama_barang, stok, harga_beli, harga_jual, created_at, gambar) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -88,18 +89,21 @@ class Barang
         return $stmt->affected_rows;
     }
 
-    public static function update($id_barang, $data) {
+    public static function update($id_barang, $data)
+    {
         global $conn;
 
-        $sql = "UPDATE barang SET id_kategori = ?, nama_barang = ?, stok = ?, harga_beli = ?, harga_jual = ? WHERE id_barang = ?";
+        $sql = "UPDATE barang SET id_kategori = ?, nama_barang = ?, gambar = ?, stok = ?, harga_beli = ?, harga_jual = ? WHERE id_barang = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("isiiii", $data['id_kategori'], $data['nama_barang'], $data['stok'], $data['harga_beli'], $data['harga_jual'], $id_barang);
+        $stmt->bind_param("issiiii", $data['id_kategori'], $data['nama_barang'], $data['gambar'], $data['stok'], $data['harga_beli'], $data['harga_jual'], $id_barang);
         $stmt->execute();
 
         return $stmt->affected_rows;
     }
 
-    public static function destroy($id_barang) {
+
+    public static function destroy($id_barang)
+    {
         global $conn;
 
         $sql = "DELETE FROM barang WHERE id_barang = ?";
@@ -108,5 +112,19 @@ class Barang
         $stmt->execute();
 
         return $stmt->affected_rows;
+    }
+
+    public static function getImageName($id_barang)
+    {
+        global $conn;
+
+        $sql = "SELECT gambar FROM barang WHERE id_barang = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $id_barang);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+
+        return $row['gambar'];
     }
 }

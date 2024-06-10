@@ -21,6 +21,13 @@ CREATE TABLE `role` (
   `nama_role` varchar(255) NOT NULL
 );
 
+CREATE TABLE `keranjang` (
+    'id_keranjang' integer PRIMARY KEY AUTO_INCREMENT,
+    `id_barang` integer NOT NULL,
+    `session_id` varchar(255) NOT NULL,
+    `kuantitas` integer NOT NULL DEFAULT 1,
+);
+
 CREATE TABLE `user` (
   `id_user` integer PRIMARY KEY AUTO_INCREMENT,
   `id_role` integer NOT NULL,

@@ -25,7 +25,7 @@ class BarangController
             $gambarType = $_FILES['gambar']['type'];
 
             // Check if the uploaded file is an image
-            $allowedTypes = ['image/jpeg', 'image/png'];
+            $allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
             if (!in_array($gambarType, $allowedTypes)) {
                 setFlashMessage('error', 'File yang diupload harus berupa gambar');
                 return;
@@ -64,7 +64,8 @@ class BarangController
         }
     }
 
-    public static function edit() {
+    public static function edit()
+    {
         $id_barang = $_POST['id_barang'];
         $data = [
             'id_kategori' => $_POST['id_kategori'],
@@ -74,6 +75,9 @@ class BarangController
             'harga_jual' => $_POST['harga_jual'],
         ];
 
+        // Get the current image name from the database
+        $currentImageName = Barang::getImageName($id_barang);
+
         if ($_FILES['gambar']['error'] === UPLOAD_ERR_OK) {
             $gambarName = $_FILES['gambar']['name'];
             $gambarTmpName = $_FILES['gambar']['tmp_name'];
@@ -81,7 +85,7 @@ class BarangController
             $gambarType = $_FILES['gambar']['type'];
 
             // Check if the uploaded file is an image
-            $allowedTypes = ['image/jpeg', 'image/png'];
+            $allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
             if (!in_array($gambarType, $allowedTypes)) {
                 setFlashMessage('error', 'File yang diupload harus berupa gambar');
                 return;
@@ -99,7 +103,13 @@ class BarangController
             $newFileName = basename($gambarName, ".$fileExtension") . "_" . $timestamp . ".$fileExtension";
             $gambarPath = $uploadDir . $newFileName;
 
-            
+            // Delete the old image if it exists
+            if (!empty($currentImageName)) {
+                $oldImagePath = $uploadDir . $currentImageName;
+                if (file_exists($oldImagePath)) {
+                    unlink($oldImagePath);
+                }
+            }
 
             // Move the uploaded image to the specified directory
             if (move_uploaded_file($gambarTmpName, $gambarPath)) {
@@ -108,6 +118,9 @@ class BarangController
                 echo 'Gagal mengupload gambar';
                 return;
             }
+        } else {
+            // If no new image is uploaded, keep the current image name
+            $data['gambar'] = $currentImageName;
         }
 
         $update = Barang::update($id_barang, $data);
@@ -120,7 +133,8 @@ class BarangController
         }
     }
 
-    public static function delete() {
+    public static function delete()
+    {
         $id_barang = $_POST['id_barang'];
         $delete = Barang::destroy($id_barang);
 
@@ -132,5 +146,3 @@ class BarangController
         }
     }
 }
-
-

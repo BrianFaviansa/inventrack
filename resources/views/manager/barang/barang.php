@@ -114,9 +114,7 @@
             <tbody>
                 <?php
                 $no = 1;
-                foreach ($barangs as $barang) :
-                    // $gambarTerpilih = $barang['gambar'] ? urlpath('assets/storage/barang_images/' . $barang['gambar']) : ''; 
-                ?>
+                foreach ($barangs as $barang) : ?>
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             <?= $no; ?>
