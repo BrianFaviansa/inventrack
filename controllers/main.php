@@ -7,5 +7,6 @@ include_once 'controllers/KasirController.php';
 include_once 'controllers/KategoriController.php';
 include_once 'controllers/BarangController.php';
 include_once 'controllers/CartController.php';
+include_once 'controllers/PenjualanController.php';
 
 session_start();

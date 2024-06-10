@@ -56,7 +56,8 @@ class Cart
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public static function updateQuantity($id_barang, $session_id, $kuantitas) {
+    public static function updateQuantity($id_barang, $session_id, $kuantitas)
+    {
         global $conn;
 
         $sql = "UPDATE keranjang SET kuantitas = ? WHERE id_barang = ? AND session_id = ?";
@@ -68,7 +69,8 @@ class Cart
         return $affected_rows;
     }
 
-    public static function deleteItem($id_barang) {
+    public static function deleteItem($id_barang)
+    {
         global $conn;
 
         $sql = "DELETE FROM keranjang WHERE id_barang = ?";
@@ -78,5 +80,59 @@ class Cart
 
         $affected_rows = $stmt->affected_rows;
         return $affected_rows;
+    }
+
+    public static function getAllItems()
+    {
+        global $conn;
+
+        $sql = "SELECT * FROM keranjang";
+        $result = $conn->query($sql);
+
+        $items = array();
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $items[] = $row;
+            }
+        }
+
+        return $items;
+    }
+
+    public static function getCartItemsBySessionId($session_id)
+    {
+        global $conn;
+
+        $sql = "SELECT k.id_keranjang, k.id_barang, b.nama_barang, b.harga_jual, k.kuantitas
+                FROM keranjang k
+                JOIN barang b ON k.id_barang = b.id_barang
+                WHERE k.session_id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $session_id);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+        $items = array();
+        
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $items[] = $row;
+            }
+        }
+
+        return $items;
+    }
+
+    public static function clearCart($session_id)
+    {
+        global $conn;
+
+        $sql = "DELETE FROM keranjang WHERE session_id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $session_id);
+        return $stmt->execute();
+
+
     }
 }

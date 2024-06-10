@@ -5,8 +5,10 @@
         <h2 class="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">Keranjang</h2>
         <div class="mt-6 sm:mt-8 md:gap-6 lg:flex lg:items-start xl:gap-8">
             <div class="mx-auto w-full flex-none lg:max-w-2xl xl:max-w-4xl">
-                <?php if (empty($belanjaans)) : ?>
-                    <p>Keranjang belanjaan kosong</p>
+                <?php if (empty($belanjaans)) :
+                    setFlashMessage('error', 'Keranjang belanja kosong. Silakan tambahkan barang ke keranjang Anda.');
+                    displayFlashError($_SESSION['flash']['pesan']);
+                ?>
                 <?php else : ?>
                     <?php foreach ($belanjaans as $index => $belanjaan) : ?>
                         <div class="space-y-6 my-3">
@@ -55,17 +57,21 @@
             </div>
             <div class="mx-auto mt-6 max-w-4xl flex-1 space-y-6 lg:mt-0 lg:w-full">
                 <div class="space-y-4 rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 sm:p-6">
-                    <p class="text-xl font-semibold text-gray-900 dark:text-white">Order summary</p>
+                    <p class="text-xl font-semibold text-gray-900 dark:text-white">Ringkasan Penjualan</p>
                     <div class="space-y-4">
                         <div class="space-y-2">
                             <!-- Other order summary details can go here -->
                         </div>
                         <dl class="flex items-center justify-between gap-4 border-t border-gray-200 pt-2 dark:border-gray-700">
                             <dt class="text-base font-bold text-gray-900 dark:text-white">Total</dt>
-                            <dd class="text-base font-bold text-gray-900 dark:text-white" id="order-total">$8,191.00</dd>
+                            <dd class="text-base font-bold text-gray-900 dark:text-white" id="order-total"></dd>
                         </dl>
                     </div>
-                    <a href="#" class="flex w-full items-center justify-center rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Proceed to Checkout</a>
+                    <div class="mb-6">
+                        <label for="tanggal_penjualan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal Penjualan</label>
+                        <input type="date" id="tanggal_penjualan" name="tanggal_penjualan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                    </div>
+                    <a href="#" id="checkout-button" class="flex w-full items-center justify-center rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Proceed to Checkout</a>
                     <div class="flex items-center justify-center gap-2">
                         <span class="text-sm font-normal text-gray-500 dark:text-gray-400"> or </span>
                         <a href="<?= urlpath('dashboard-manager/transaksi'); ?>" title="" class="inline-flex items-center gap-2 text-sm font-medium text-blue-700 underline hover:no-underline dark:text-blue-500">
@@ -213,5 +219,50 @@
             });
         });
 
+
+        $('#checkout-button').click(function() {
+            let tanggalPenjualan = $('#tanggal_penjualan').val();
+
+            Swal.fire({
+                title: 'Apakah Anda yakin ingin checkout?',
+                text: "Tindakan ini akan memproses pembelian Anda.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Checkout!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '<?= urlpath('Transaksi/checkout'); ?>',
+                        method: 'POST',
+                        data: {
+                            'tanggal_penjualan': tanggalPenjualan
+                        },
+                        success: function(response) {
+                            Swal.fire({
+                                title: 'Berhasil!',
+                                text: 'Checkout berhasil dilakukan',
+                                icon: 'success',
+                                confirmButtonText: 'OK'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    location.reload();
+                                }
+                            });
+                        },
+                        error: function(xhr, status, error) {
+                            Swal.fire({
+                                title: 'Gagal!',
+                                text: 'Checkout gagal.',
+                                icon: 'error',
+                                confirmButtonText: 'OK'
+                            });
+                        }
+                    });
+                }
+            });
+        });
     });
 </script>

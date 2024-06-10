@@ -37,6 +37,7 @@ Router::url('dashboard-manager/keranjang', 'get', 'ManagerController::keranjang'
 Router::url('Transaksi/addToCart', 'post', 'CartController::addToCart');
 Router::url('Transaksi/updateCartQuantity', 'post', 'CartController::updateCartQuantity');
 Router::url('Transaksi/deleteCartItem', 'post', 'CartController::deleteCartItem');
+Router::url('Transaksi/checkout', 'post', 'PenjualanController::checkout');
 
 // dashboard stoker
 Router::url('dashboard-stoker', 'get', 'StokerController::index');

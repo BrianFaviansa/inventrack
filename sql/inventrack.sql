@@ -42,7 +42,7 @@ CREATE TABLE `penjualan` (
   `id_penjualan` integer PRIMARY KEY AUTO_INCREMENT,
   `id_user` integer NOT NULL,
   `total_harga` decimal(10,2) NOT NULL,
-  `created_at` timestamp
+  `tanggal_penjualan` date NOT NULL
 );
 
 CREATE TABLE `detail_penjualan` (
@@ -50,8 +50,7 @@ CREATE TABLE `detail_penjualan` (
   `id_penjualan` integer NOT NULL,
   `id_barang` integer NOT NULL,
   `jumlah` integer NOT NULL,
-  `harga_jual` decimal(10,2) NOT NULL,
-  `created_at` timestamp
+  `harga_jual` decimal(10,2) NOT NULL
 );
 
 ALTER TABLE `penjualan` ADD FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
