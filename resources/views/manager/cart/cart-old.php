@@ -94,34 +94,33 @@
 
         function updateCartInDatabase(id_barang, kuantitas) {
             $.ajax({
-                url: '<?= urlpath('Transaksi/updateCartQuantity'); ?>',
+                url: '/inventrack/Transaksi/updateCartQuantity',
                 method: 'POST',
                 data: {
                     id_barang: id_barang,
                     kuantitas: kuantitas
                 },
                 success: function(response) {
-                    Swal.fire({
-                        title: 'Kuantitas berhasil diperbarui.',
-                        text: response.message,
-                        icon: 'success',
-                        confirmButtonText: 'OK'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            updateOrderTotal();
-                            location.reload();
+                    var jsonResponse = response;
+                    if (typeof response === 'string') {
+                        try {
+                            jsonResponse = JSON.parse(response);
+                        } catch (e) {
+                            console.error('Error parsing response:', e);
+                            return;
                         }
-                    });
-                },
+                    }
 
-                error: function(xhr, status, error) {
-                    Swal.fire({
-                        title: 'Gagal',
-                        text: 'Terjadi kesalahan saat memperbarui kuantitas.',
-                        icon: 'error',
-                        confirmButtonText: 'OK'
-                    });
-                }
+                    if (jsonResponse.success) {
+                        // Eksekusi skrip SweetAlert dari respons server
+                        eval(jsonResponse.script);
+
+                        // Memperbarui total pesanan
+                        updateOrderTotal();
+                    } else {
+                        console.error('Error updating cart:', jsonResponse.message);
+                    }
+                },
             });
         }
 
@@ -132,7 +131,7 @@
             var currentValue = parseInt(input.val());
             input.val(currentValue + 1);
 
-            var id_barang = input.data('id');
+            var id_barang = input.data('id'); // Make sure the data-id attribute is set on the input element
             var newQuantity = currentValue + 1;
             updateCartInDatabase(id_barang, newQuantity);
 
@@ -147,7 +146,7 @@
             if (currentValue > 1) {
                 input.val(currentValue - 1);
 
-                var id_barang = input.data('id');
+                var id_barang = input.data('id'); // Make sure the data-id attribute is set on the input element
                 var newQuantity = currentValue - 1;
                 updateCartInDatabase(id_barang, newQuantity);
 
