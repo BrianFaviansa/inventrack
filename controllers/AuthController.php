@@ -50,47 +50,19 @@ class AuthController
     static function registerProses()
     {
         $post = array_map('htmlspecialchars', $_POST);
-        $requiredFields = ['nama', 'email', 'password', 'id_role'];
-        foreach ($requiredFields as $field) {
-            if (empty(trim($post[$field]))) {
-                http_response_code(400);
-                echo json_encode(['message' => 'Harap isi semua kolom yang diperlukan!']);
-                exit();
-            }
-        }
-
-        // Validasi email
-        if (!filter_var($post['email'], FILTER_VALIDATE_EMAIL)) {
-            http_response_code(400);
-            echo json_encode(['message' => 'Email tidak valid!']);
-            exit();
-        }
-
-        try {
-            $existingEmail = User::getUserByEmail($post['email']);
-
-            if ($existingEmail) {
-                if ($existingEmail['email'] === $post['email']) {
-                    throw new Exception('Email telah terdaftar');
-                }
-            }
-
-            $user = User::register([
-                'nama' => $post['nama'],
-                'email' => $post['email'],
-                'password' => password_hash($post['password'], PASSWORD_DEFAULT),
-                'no_telpon' => $post['no_telpon'],
-                'id_role' => $post['id_role']
-            ]);
-
-            if ($user) {
-                header('Location: login');
-            }
-            exit();
-        } catch (Exception $e) {
-            http_response_code(400);
-            echo json_encode(['message' => 'Registrasi gagal! Email telah terdaftar!']);
-            exit();
+        $user = User::register([
+            'nama' => $post['nama'],
+            'email' => $post['email'],
+            'password' => $post['password'],
+            'no_telpon' => $post['no_telpon'],
+            'id_role' => $post['id_role']
+        ]);
+        if ($user) {
+            setFlashMessage('success', 'Berhasil mendaftar');
+            header('Location: login');
+        } else {
+            setFlashMessage('error', 'Gagal mendaftar');
+            header('Location: register');
         }
     }
 

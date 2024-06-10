@@ -10,7 +10,7 @@ Router::url('register', 'get', 'AuthController::registerAs');
 Router::url('register/manager', 'get', 'AuthController::registerManager');
 Router::url('register/stoker', 'get', 'AuthController::registerStoker');
 Router::url('register/kasir', 'get', 'AuthController::registerKasir');
-Router::url('register', 'post', 'AuthController::registerProses');
+Router::url('registerProses', 'post', 'AuthController::registerProses');
 Router::url('logout', 'get', 'AuthController::logout');
 
 

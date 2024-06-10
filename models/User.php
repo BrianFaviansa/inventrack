@@ -22,22 +22,34 @@ class User
         }
     }
 
-    static function register($data = [])
-    {
+    public static function register($data = []) {
         global $conn;
 
+        $id_role = $data['id_role'];
         $nama = $data['nama'];
         $password = $data['password'];
         $no_telpon = $data['no_telpon'];
         $email = $data['email'];
 
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $sql = "INSERT INTO user SET nama = ?, password = ?, no_telpon =?, email = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param('ssss', $nama, $hashedPassword, $email);
-        $stmt->execute();
 
-        $result = $stmt->affected_rows > 0 ? true : false;
+        $sql = "INSERT INTO user (id_role, nama, password, no_telpon, email) VALUES (?, ?, ?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+
+        if (!$stmt) {
+            throw new Exception('Failed to prepare statement: ' . $conn->error);
+        }
+
+        $stmt->bind_param('issss', $id_role, $nama, $hashedPassword, $no_telpon, $email);
+
+        if (!$stmt->execute()) {
+            throw new Exception('Failed to execute statement: ' . $stmt->error);
+        }
+
+        $result = $stmt->affected_rows > 0;
+
+        $stmt->close();
+
         return $result;
     }
 
