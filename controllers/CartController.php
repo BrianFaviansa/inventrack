@@ -55,4 +55,26 @@ class CartController
             echo json_encode($response);
         }
     }
+
+    public static function deleteCartItem() {
+        // Pastikan permintaan adalah POST
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Ambil ID barang dari permintaan
+            $id_barang = $_POST['id_barang'];
+
+            // Panggil metode model untuk menghapus item
+            $deleted = Cart::deleteItem($id_barang);
+
+            // Berikan respons JSON berdasarkan hasil penghapusan
+            if ($deleted) {
+                echo json_encode(array('success' => true));
+            } else {
+                echo json_encode(array('success' => false, 'message' => 'Gagal menghapus item dari keranjang.'));
+            }
+        } else {
+            // Jika bukan permintaan POST, kembalikan 404
+            http_response_code(404);
+        }
+    }
+
 }

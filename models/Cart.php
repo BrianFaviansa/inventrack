@@ -67,4 +67,16 @@ class Cart
         $affected_rows = $stmt->affected_rows;
         return $affected_rows;
     }
+
+    public static function deleteItem($id_barang) {
+        global $conn;
+
+        $sql = "DELETE FROM keranjang WHERE id_barang = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $id_barang);
+        $stmt->execute();
+
+        $affected_rows = $stmt->affected_rows;
+        return $affected_rows;
+    }
 }
