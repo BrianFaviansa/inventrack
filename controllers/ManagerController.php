@@ -43,7 +43,7 @@ class ManagerController
         } else {
             $kategoris = Kategori::getAllKategori();
             return view('manager/dashboard_layout', [
-                'url' => 'kategori/kategori',
+                'url' => 'kategori',
                 'kategoris' => $kategoris,
                 'user' => $_SESSION['user'],
             ]);
@@ -58,7 +58,7 @@ class ManagerController
             $barangs = Barang::getBarangWithNamaKategori();
             $kategoris = Kategori::getAllKategori();
             return view('manager/dashboard_layout', [
-                'url' => 'barang/barang',
+                'url' => 'barang',
                 'barangs' => $barangs,
                 'kategoris' => $kategoris,
                 'user' => $_SESSION['user'],
@@ -74,7 +74,7 @@ class ManagerController
             $barangs = Barang::getBarangOrderByKategori();
             $kategoris = Kategori::getAllKategori();
             return view('manager/dashboard_layout', [
-                'url' => 'transaksi/transaksi',
+                'url' => 'transaksi',
                 'barangs' => $barangs,
                 'kategoris' => $kategoris,
                 'user' => $_SESSION['user'],
@@ -89,9 +89,23 @@ class ManagerController
         } else {
             $belanjaans = Cart::getCart(session_id());
             return view('manager/dashboard_layout', [
-                'url' => 'cart/cart',
+                'url' => 'cart',
                 'user' => $_SESSION['user'],
                 'belanjaans' => $belanjaans,
+            ]);
+        }
+    }
+
+    static function statistik()
+    {
+        if (!isset($_SESSION['user'])) {
+            header('location: login');
+        } else {
+            $statistiks = Penjualan::getAllPenjualanByTanggal();
+            return view('manager/dashboard_layout', [
+                'url' => 'statistik',
+                'statistiks' => $statistiks,
+                'user' => $_SESSION['user'],
             ]);
         }
     }

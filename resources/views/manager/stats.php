@@ -49,10 +49,12 @@
             </div>
         </div>
 
-        <h2 class="text-4xl mb-4 font-bold dark:text-white">Jumlah Barang Berdasarkan Kategori</h2>
+        <h2 class="text-4xl mb-4 font-bold dark:text-white text-center">Jumlah Barang Berdasarkan Kategori</h2>
+        <div class="flex justify-center">
+            <div class="graphContainer w-[80%] bg-white shadow-xl p-4 rounded-2xl" style="width: 80%; background-color: white; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); padding: 4px; border-radius: 20px;">
+                <canvas id="myChart"></canvas>
+            </div>
 
-        <div class="graphContainer w-[80%] bg-white shadow-xl p-4 rounded-2xl" style="width: 80%; background-color: white; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); padding: 4px; border-radius: 20px;">
-            <canvas id="myChart"></canvas>
         </div>
         <?php
         $kategori = [];

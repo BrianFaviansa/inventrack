@@ -39,6 +39,9 @@ Router::url('Transaksi/updateCartQuantity', 'post', 'CartController::updateCartQ
 Router::url('Transaksi/deleteCartItem', 'post', 'CartController::deleteCartItem');
 Router::url('Transaksi/checkout', 'post', 'PenjualanController::checkout');
 
+// dashboard manager - statistik
+Router::url('dashboard-manager/statistik', 'get', 'ManagerController::statistik');
+
 // dashboard stoker
 Router::url('dashboard-stoker', 'get', 'StokerController::index');
 
