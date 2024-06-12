@@ -13,7 +13,17 @@ class AuthController
     }
     static function login()
     {
-        return view('auth/auth_layout', ['url' => 'login']);
+        if(isset($_SESSION['user'])){
+            if ($_SESSION['user']['id_role'] == '1') {
+                header('Location: dashboard-manager');
+            } elseif ($_SESSION['user']['id_role'] == '2') {
+                header('Location: dashboard-kasir');
+            } elseif ($_SESSION['user']['id_role'] == '3') {
+                header('Location: dashboard-stoker');
+            }
+        } else {
+            return view('auth/auth_layout', ['url' => 'login']);
+        }
     }
 
     static function registerAs()
