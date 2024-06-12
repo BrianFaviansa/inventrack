@@ -33,17 +33,6 @@ class Kategori
         return $total;
     }
 
-    public function barang($id_kategori)
-    {
-        $sql = "SELECT * FROM barang WHERE id_kategori = ?";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("i", $id_kategori);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        return $result->fetch_all(MYSQLI_ASSOC);
-    }
-
     public static function store($data)
     {
         global $conn;

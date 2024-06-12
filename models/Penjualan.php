@@ -10,16 +10,6 @@ class Penjualan
         $this->conn = $conn;
     }
 
-    public static function getAllPenjualan()
-    {
-        global $conn;
-
-        $sql = "SELECT * FROM penjualan";
-        $result = $conn->query($sql);
-
-        return $result;
-    }
-
     public static function countPenjualan()
     {   
         global $conn;

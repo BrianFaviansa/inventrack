@@ -50,6 +50,35 @@ class AuthController
     static function registerProses()
     {
         $post = array_map('htmlspecialchars', $_POST);
+        $errors = [];
+
+        if (!filter_var($post['email'], FILTER_VALIDATE_EMAIL)) {
+            $errors[] = 'Email tidak valid';
+        }
+
+        if (strlen($post['nama']) < 3) {
+            $errors[] = 'Nama minimal 3 huruf';
+        }
+
+        if (strlen($post['password']) < 5) {
+            $errors[] = 'Password minimal 5 huruf';
+        }
+
+        if (!empty($errors)) {
+            $errorMessage = implode(', ', $errors);
+            setFlashMessage('error', $errorMessage);
+            if ($post['id_role'] == 1) {
+                header('Location: register/manager');
+                return;
+            } elseif ($post['id_role'] == 2) {
+                header('Location: register/kasir');
+                return;
+            } elseif ($post['id_role'] == 3) {
+                header('Location: register/stoker');
+                return;
+            }
+        }
+
         $user = User::register([
             'nama' => $post['nama'],
             'email' => $post['email'],
@@ -57,15 +86,24 @@ class AuthController
             'no_telpon' => $post['no_telpon'],
             'id_role' => $post['id_role']
         ]);
+
         if ($user) {
             setFlashMessage('success', 'Berhasil mendaftar');
             header('Location: login');
         } else {
-            setFlashMessage('error', 'Gagal mendaftar');
-            header('Location: register');
+            setFlashMessage('success', 'Gagal mendaftar');
+            if ($post['id_role'] == 1) {
+                header('Location: register/manager');
+                return;
+            } elseif ($post['id_role'] == 2) {
+                header('Location: register/kasir');
+                return;
+            } elseif ($post['id_role'] == 3) {
+                header('Location: register/stoker');
+                return;
+            }
         }
     }
-
     static function sessionLogin()
     {
         $post = array_map('htmlspecialchars', $_POST);
@@ -91,6 +129,7 @@ class AuthController
             header('Location: login');
         }
     }
+
     static function logout()
     {
         session_destroy();
@@ -101,6 +140,4 @@ class AuthController
     {
         return view('auth/auth_layout', ['url' => 'restricted']);
     }
-
-
 }

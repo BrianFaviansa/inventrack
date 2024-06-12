@@ -16,18 +16,4 @@ class Roles
         $stmt->close();
         return $roleName;
     }
-
-    static function getRoleIdByName($roleName)
-    {
-        global $conn;
-        $sql = "SELECT id FROM role WHERE nama_role = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param('s', $roleName);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $row = $result->fetch_assoc();
-        $roleId = $row['id'];
-        $stmt->close();
-        return $roleId;
-    }
 }

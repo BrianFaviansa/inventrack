@@ -53,50 +53,6 @@ class User
         return $result;
     }
 
-    static function getPassword($nama)
-    {
-        global $conn;
-        $sql = "SELECT password FROM user WHERE nama = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param('s', $nama);
-        $stmt->execute();
-
-        $result = $stmt->affected_rows > 0 ? true : false;
-        return $result;
-    }
-
-    public static function getUserByEmail($email)
-    {
-        global $conn;
-
-        $email = $conn->real_escape_string($email);
-
-        $query = "SELECT email FROM users WHERE email = '$email' LIMIT 1";
-        $result = $conn->query($query);
-
-        if ($result->num_rows > 0) {
-            return $result->fetch_assoc();
-        } else {
-            return null;
-        }
-    }
-
-    public static function getUserById($id)
-    {
-        global $conn;
-
-        $id = $conn->real_escape_string($id);
-
-        $query = "SELECT * FROM users WHERE id = '$id' LIMIT 1";
-        $result = $conn->query($query);
-
-        if ($result->num_rows > 0) {
-            return $result->fetch_assoc();
-        } else {
-            return null;
-        }
-    }
-
     public static function countUser()
     {
         global $conn;
@@ -107,24 +63,5 @@ class User
         $total = $row['total'];
 
         return $total;
-    }
-
-    public static function role($id)
-    {
-        global $conn;
-
-        $query = "SELECT * FROM role JOIN user_role ON role.id_role = user_roles.role_id WHERE user_roles.user_id = ?";
-        $stmt = $conn->prepare($query);
-        $stmt->bind_param('i', $id);
-        $stmt->execute();
-
-        $result = $stmt->get_result();
-        $roles = [];
-
-        while ($row = $result->fetch_assoc()) {
-            $roles[] = $row;
-        }
-
-        return $roles;
     }
 }

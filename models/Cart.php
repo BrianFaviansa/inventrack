@@ -82,24 +82,6 @@ class Cart
         return $affected_rows;
     }
 
-    public static function getAllItems()
-    {
-        global $conn;
-
-        $sql = "SELECT * FROM keranjang";
-        $result = $conn->query($sql);
-
-        $items = array();
-
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $items[] = $row;
-            }
-        }
-
-        return $items;
-    }
-
     public static function getCartItemsBySessionId($session_id)
     {
         global $conn;
@@ -132,7 +114,5 @@ class Cart
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("s", $session_id);
         return $stmt->execute();
-
-
     }
 }

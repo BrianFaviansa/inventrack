@@ -24,28 +24,24 @@ class BarangController
             $gambarSize = $_FILES['gambar']['size'];
             $gambarType = $_FILES['gambar']['type'];
 
-            // Check if the uploaded file is an image
             $allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
             if (!in_array($gambarType, $allowedTypes)) {
                 setFlashMessage('error', 'File yang diupload harus berupa gambar');
                 return;
             }
 
-            // Define the directory to save the uploaded image
             $uploadDir = __DIR__ . '/../assets/storage/barang_images/';
             if (!is_dir($uploadDir)) {
                 mkdir($uploadDir, 0777, true);
             }
 
-            // Generate a new unique file name with current timestamp
             $timestamp = time();
             $fileExtension = pathinfo($gambarName, PATHINFO_EXTENSION);
             $newFileName = basename($gambarName, ".$fileExtension") . "_" . $timestamp . ".$fileExtension";
             $gambarPath = $uploadDir . $newFileName;
 
-            // Move the uploaded image to the specified directory
             if (move_uploaded_file($gambarTmpName, $gambarPath)) {
-                $data['gambar'] = $newFileName; // Store only the file name in the database
+                $data['gambar'] = $newFileName; 
             } else {
                 echo 'Gagal mengupload gambar';
                 return;
@@ -80,7 +76,6 @@ class BarangController
             'harga_jual' => $_POST['harga_jual'],
         ];
 
-        // Get the current image name from the database
         $currentImageName = Barang::getImageName($id_barang);
 
         if ($_FILES['gambar']['error'] === UPLOAD_ERR_OK) {
@@ -89,26 +84,22 @@ class BarangController
             $gambarSize = $_FILES['gambar']['size'];
             $gambarType = $_FILES['gambar']['type'];
 
-            // Check if the uploaded file is an image
             $allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
             if (!in_array($gambarType, $allowedTypes)) {
                 setFlashMessage('error', 'File yang diupload harus berupa gambar');
                 return;
             }
 
-            // Define the directory to save the uploaded image
             $uploadDir = __DIR__ . '/../assets/storage/barang_images/';
             if (!is_dir($uploadDir)) {
                 mkdir($uploadDir, 0777, true);
             }
 
-            // Generate a new unique file name with current timestamp
             $timestamp = time();
             $fileExtension = pathinfo($gambarName, PATHINFO_EXTENSION);
             $newFileName = basename($gambarName, ".$fileExtension") . "_" . $timestamp . ".$fileExtension";
             $gambarPath = $uploadDir . $newFileName;
 
-            // Delete the old image if it exists
             if (!empty($currentImageName)) {
                 $oldImagePath = $uploadDir . $currentImageName;
                 if (file_exists($oldImagePath)) {
@@ -116,15 +107,13 @@ class BarangController
                 }
             }
 
-            // Move the uploaded image to the specified directory
             if (move_uploaded_file($gambarTmpName, $gambarPath)) {
-                $data['gambar'] = $newFileName; // Store only the file name in the database
+                $data['gambar'] = $newFileName;
             } else {
                 echo 'Gagal mengupload gambar';
                 return;
             }
         } else {
-            // If no new image is uploaded, keep the current image name
             $data['gambar'] = $currentImageName;
         }
 

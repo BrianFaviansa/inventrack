@@ -42,19 +42,6 @@ class Barang
         return $total;
     }
 
-    public static function getNamaKategori($idKategori)
-    {
-        global $conn;
-
-        $sql = "SELECT nama_kategori FROM kategori WHERE id_kategori = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("i", $idKategori);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $row = $result->fetch_assoc();
-        return $row['nama_kategori'];
-    }
-
     public static function getBarangWithNamaKategori()
     {
         global $conn;
@@ -64,29 +51,6 @@ class Barang
 
         return $result;
     }
-
-    public function detailPembelian($id_barang)
-    {
-        $sql = "SELECT * FROM detail_pembelian WHERE id_barang = ?";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("i", $id_barang);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        return $result->fetch_all(MYSQLI_ASSOC);
-    }
-
-    public function detailPenjualan($id_barang)
-    {
-        $sql = "SELECT * FROM detail_penjualan WHERE id_barang = ?";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("i", $id_barang);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        return $result->fetch_all(MYSQLI_ASSOC);
-    }
-
     public static function store($data)
     {
         global $conn;
