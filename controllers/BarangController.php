@@ -12,7 +12,6 @@ class BarangController
         $data = [
             'id_kategori' => $_POST['id_kategori'],
             'nama_barang' => $_POST['nama_barang'],
-            'stok' => $_POST['stok'],
             'harga_beli' => $_POST['harga_beli'],
             'harga_jual' => $_POST['harga_jual'],
             'created_at' => date('Y-m-d H:i:s'),
@@ -27,6 +26,11 @@ class BarangController
             $allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
             if (!in_array($gambarType, $allowedTypes)) {
                 setFlashMessage('error', 'File yang diupload harus berupa gambar');
+                if ($_SESSION['user']['id_role'] == 1) {
+                    header('location: dashboard-manager/barang');
+                } else if ($_SESSION['user']['id_role'] == 3) {
+                    header('location: dashboard-stoker/barang');
+                }
                 return;
             }
 
@@ -41,7 +45,7 @@ class BarangController
             $gambarPath = $uploadDir . $newFileName;
 
             if (move_uploaded_file($gambarTmpName, $gambarPath)) {
-                $data['gambar'] = $newFileName; 
+                $data['gambar'] = $newFileName;
             } else {
                 echo 'Gagal mengupload gambar';
                 return;
@@ -71,7 +75,6 @@ class BarangController
         $data = [
             'id_kategori' => $_POST['id_kategori'],
             'nama_barang' => $_POST['nama_barang'],
-            'stok' => $_POST['stok'],
             'harga_beli' => $_POST['harga_beli'],
             'harga_jual' => $_POST['harga_jual'],
         ];
@@ -87,6 +90,11 @@ class BarangController
             $allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
             if (!in_array($gambarType, $allowedTypes)) {
                 setFlashMessage('error', 'File yang diupload harus berupa gambar');
+                if ($_SESSION['user']['id_role'] == 1) {
+                    header('location: dashboard-manager/barang');
+                } else if ($_SESSION['user']['id_role'] == 3) {
+                    header('location: dashboard-stoker/barang');
+                }
                 return;
             }
 
@@ -120,14 +128,14 @@ class BarangController
         $update = Barang::update($id_barang, $data);
 
         if ($update) {
-            setFlashMessage('success', 'Barang berhasil ditambahkan');
+            setFlashMessage('success', 'Data barang berhasil diperbarui');
             if ($_SESSION['user']['id_role'] == 1) {
                 header('location: dashboard-manager/barang');
             } else if ($_SESSION['user']['id_role'] == 3) {
                 header('location: dashboard-stoker/barang');
             }
         } else {
-            echo 'Gagal menambahkan barang';
+            echo 'Gagal memperbarui data barang';
         }
     }
 
